@@ -4,7 +4,7 @@ const NODE_ENV = process.env.NODE_ENV;
 
 module.exports = {
   resolve: {
-    extensions: ['.js', '.jsx', '.json'],
+    extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
   },
   mode: NODE_ENV ? NODE_ENV : 'development',
   target: "node",  // this build only for nodejs. 
