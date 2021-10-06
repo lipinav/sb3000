@@ -5,10 +5,7 @@ import styles from './header.less';
 function HeaderComponent() {  // component
   return (
     <header>
-      <h1 className={styles.example}>Chreddit for our own use</h1>
-      <p>
-      Hello there
-      </p>
+      <h1 className={styles.example}>Hello React</h1>
     </header>
   );
 }
