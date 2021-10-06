@@ -40,7 +40,7 @@ module.exports = {
         use: ['ts-loader'],
       },
       {
-        test: /\.css$/,
+        test: /\.less$/,
         use: [
           'style-loader',
           {
@@ -52,7 +52,7 @@ module.exports = {
               }
             }
           },
-          // 'less-loader',
+          'less-loader',
         ]
       },
     ],

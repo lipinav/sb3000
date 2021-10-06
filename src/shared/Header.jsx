@@ -1,6 +1,6 @@
 import { hot } from 'react-hot-loader/root';
 import * as React from 'react';
-import styles from './header.css';
+import styles from './header.less';
 
 function HeaderComponent() {  // component
   return (
