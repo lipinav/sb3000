@@ -4,7 +4,7 @@
 // Напишите тип функции, конкатенирующей две строки
 // concat('Hello ', 'World') // -> Hello World;
 type TConcat = (str1: string, str2: string) => string;
-function Concat<TConcat>(arg1, arg2) {
+function Concat<TConcat>(arg1: string, arg2: string) {
   return arg1 + ' ' + arg2;
 }
 console.log('task 1:')
@@ -88,7 +88,7 @@ interface IHomeTask {
   }
 }
 type MyPartial<T> = {
-  [N in keyof T]?: T[N] extends object ? MyPartial<T[N]> : T[N]
+  [N in keyof T]?: T[N] extends Record<string, unknown> ? MyPartial<T[N]> : T[N]
 }
 const homeTask: MyPartial<IHomeTask> = {
   externalData: {

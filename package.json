@@ -11,7 +11,7 @@
     "build:prod": "env NODE_ENV=production webpack --config webpack.config.js",
     "dev": "env NODE_ENV=development node bin/dev.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint . --ext .ts"
+    "lint": "eslint . --ext .ts --ext .jsx"
   },
   "repository": {
     "type": "git",
@@ -26,6 +26,7 @@
   "devDependencies": {
     "@hot-loader/react-dom": "^17.0.1",
     "@types/jest": "^27.0.2",
+    "@types/react": "^17.0.27",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
     "@typescript-eslint/parser": "^4.33.0",
     "clean-webpack-plugin": "^3.0.0",
