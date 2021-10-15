@@ -1,0 +1,14 @@
+@media all with (min-width: 1024px) {
+  .header {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    padding: 40px;
+  }
+}
+
+@media all with (min-width: 1024px) {
+  .header {
+    padding: 67px 0;
+  }
+}
