@@ -1,0 +1,219 @@
+.card {
+  background-color: var(--white);
+  border-radius: 7px;
+  display: flex;
+  flex-flow: row wrap;
+  position: relative;
+}
+
+.card > * {
+  flex: 1 1 100%;
+}
+
+.publishedLabel {
+  display: none;
+}
+
+.textContent {
+  display: block;
+  flex-flow: row wrap;
+  padding: 22px 20px 13px;
+}
+
+.metaData {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  font-size: 10px;
+  line-height: 12px;
+}
+
+.userLink {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  height: 20px;
+  padding: 0 6px 0 0;
+}
+
+.userLink:hover a {
+  text-decoration: underline;
+}
+
+.avatar {
+  border-radius: 20px;
+  width: 20px;
+  height: 20px;
+  margin: 0 7px 0 0;
+}
+
+.username {
+  color: var(--orange);
+}
+
+.createdAt,
+.createdAt * {
+  color: var(--grey99);
+}
+
+.title:hover a {
+  color: var(--orange);
+}
+
+.menu {
+  position: absolute;
+  top: 17px;
+  right: 15px;
+}
+
+.menuButton {
+  width: 31px;
+  height: 31px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(90deg);
+  border-radius: 31px;
+  background: transparent;
+  border: 0;
+}
+
+.menuButton:active,
+.menuButton:hover {
+  background-color: rgba(51, 51, 51, 0.1);
+}
+
+
+.controls {
+  display: flex;
+  padding: 10px 20px;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+}
+
+.title {
+  font-size: 16px;
+  line-height: 19px;
+  font-weight: normal;
+  margin: 0;
+  padding: 7px 0 0;
+}
+
+.postLink {
+  overflow: hidden;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+}
+
+.preview {
+  max-height: 178px;
+}
+
+.previewImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.actions {
+  display: flex;
+}
+
+
+@media all and (min-width: 1540px) {
+  .card {
+    padding: 0 60px;
+    /*
+    position: relative;
+    */
+  }
+
+  .card:hover,
+  .card:focus-within {
+    outline: 1px solid var(--greyD9);
+  }
+
+  .textContent {
+    display: flex;
+    flex-flow: column wrap;
+    align-self: center;
+    flex-basis: auto;
+    padding: 20px 20px 20px;
+    order: 0;
+  }
+
+  .metaData {
+    order: 1;
+  }
+
+  .userLink {
+    order: 1;
+  }
+
+
+  .username {
+    position: relative;
+    z-index: 1;
+    text-decoration: none;
+  }
+
+  .createdAt,
+  .createdAt * {
+    order: 0;
+    padding: 0 6px 0 0;
+  }
+
+  .publishedLabel {
+    display: inline;
+    padding: 0;
+  }
+
+  .title {
+    padding: 7px 0;
+    order: 0;
+  }
+
+  .preview {
+    max-height: 107px;
+    max-width: 190px;
+    order: -1;
+  }
+
+  .previewImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    padding: 10px;
+    border-radius: 3px;
+  }
+
+
+  .menu {
+    position: absolute;
+    top: 40px;
+    right: 130px;
+    width: 31px;
+    height: 31px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 31px;
+    background: transparent;
+    border: 0;
+  }
+
+  .menuButton {
+    transform: rotate(0deg);
+  }
+
+  .controls {
+    position: absolute;
+    top: 22px;
+    right: 60px;
+  }
+
+  .actions {
+    display: none;
+  }
+}

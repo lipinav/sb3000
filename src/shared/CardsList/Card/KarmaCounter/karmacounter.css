@@ -1,0 +1,27 @@
+.karmaCounter > * + * {
+  padding: 0 0 0 4px;
+}
+
+.karmaValue {
+  color: var(--grayC4);
+}
+
+.up:hover > svg > path {
+  fill: var(--green);
+}
+
+.down:hover > svg > path {
+  fill: var(--orange);
+}
+
+@media all and (min-width: 1540px) {
+  .karmaCounter > * {
+    display: block;
+    margin: auto;
+    text-align: center;
+    width: 30;
+    /*
+    padding: 0 0 0 4px;
+    */
+  }
+}
