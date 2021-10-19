@@ -1,4 +1,4 @@
-@media all with (min-width: 1024px) {
+@media all and (min-width: 1024px) {
   .header {
     display: flex;
     flex-flow: row nowrap;
@@ -7,7 +7,7 @@
   }
 }
 
-@media all with (min-width: 1024px) {
+@media all and (min-width: 1540px) {
   .header {
     padding: 67px 0;
   }

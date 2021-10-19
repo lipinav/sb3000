@@ -1,12 +1,9 @@
 .threadTitle {
-  font-family: Roboto;
-  font-style: normal;
   font-weight: normal;
+  padding: 0 20px;
   font-size: 20px;
   line-height: 23px;
-  background-color: var(--white);
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-  margin: 0 0 38px;
+  margin: 0 0 15px;
 }
 
 @media all and (min-width: 1024px) {

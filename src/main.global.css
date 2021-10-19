@@ -6,12 +6,12 @@
   --green:   #A4CC33;
   --whiteLightness: 100%;
   --white:   hsl(0, 0%, var(--whiteLightness));
-  --greyF4:  hsl(0, 0%, var(--whiteLightness) - 4%);
-  --greyF3:  hsl(0, 0%, var(--whiteLightness) - 5%);
-  --greyD9:  hsl(0, 0%, var(--whiteLightness) - 15%);
-  --greyC4:  hsl(0, 0%, var(--whiteLightness) - 23%);
-  --grey99:  hsl(0, 0%, var(--whiteLightness) - 40%);
-  --grey66:  hsl(0, 0%, var(--whiteLightness) - 60%);
+  --greyF4:  hsl(0, 0%, calc(var(--whiteLightness) - 4%));
+  --greyF3:  hsl(0, 0%, calc(var(--whiteLightness) - 5%));
+  --greyD9:  hsl(0, 0%, calc(var(--whiteLightness) - 15%));
+  --greyC4:  hsl(0, 0%, calc(var(--whiteLightness) - 23%));
+  --grey99:  hsl(0, 0%, calc(var(--whiteLightness) - 40%));
+  --grey66:  hsl(0, 0%, calc(var(--whiteLightness) - 60%));
 }
 
 body {
