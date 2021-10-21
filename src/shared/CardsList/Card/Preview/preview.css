@@ -1,0 +1,25 @@
+.preview {
+  max-height: 178px;
+}
+
+.previewImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media all and (min-width: 1540px) {
+  .preview {
+    max-height: 107px;
+    max-width: 190px;
+    order: -1;
+  }
+
+  .previewImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    padding: 10px;
+    border-radius: 3px;
+  }
+}
