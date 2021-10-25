@@ -12,14 +12,10 @@ const contentList: Array<ITitle> = [
   {'title': 'three'},
 ]
 
-export function CardsList() {
+export function CardsList(): JSX.Element {
   return (
     <ul className={styles.cardsList}>
-      {
-        contentList.map((function(d, idx) {
-          return (<Card key={idx} title={d.title} />)
-        }))
-      }
+      {contentList.map((d, idx) => <Card key={idx} title={d.title} />)}
     </ul>
   );
 }

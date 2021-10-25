@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './metadata.css';
 
-export function MetaData() {
+export function MetaData(): JSX.Element {
   return (
     <div>
       <div className={styles.userLink}>

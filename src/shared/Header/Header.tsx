@@ -4,11 +4,7 @@ import { SearchBlock } from './SearchBlock';
 import { ThreadTitle } from './ThreadTitle';
 import { SortBlock } from './SortBlock';
 
-interface IHeaderProps {
-  children?: React.ReactNode;
-}
-
-export function Header({ children }: IHeaderProps) {
+export function Header(): JSX.Element {
   return (
     <header className={styles.header}>
       <SearchBlock />

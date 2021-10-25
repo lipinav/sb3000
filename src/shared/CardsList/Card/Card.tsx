@@ -14,7 +14,7 @@ interface ICardTitle {
   title: string;
 }
 
-export function Card(props: ICardTitle) {
+export function Card(props: ICardTitle): JSX.Element {
   return (
     <li className={styles.card} key={props.key}>
       <div className={styles.textContent}>
