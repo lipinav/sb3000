@@ -5,18 +5,18 @@ import { Card } from './Card';
 interface ITitle {
   title: string;
   id: string;
+  onClick: (id: string) => void;
 }
 
 interface IMyListProps {
   list: ITitle[];
-  onClick: (id: string) => void;
 }
 
-export function CardsList({ list, onClick }: IMyListProps): JSX.Element {
+export function CardsList({ list }: IMyListProps): JSX.Element {
   console.log('list: ', list)
   return (
     <ul className={styles.cardsList}>
-      {list.map((item) => <Card id={item.id} title={item.title} onClick={() => onClick(item.id)}/>)}
+      {list.map((item) => <Card id={item.id} title={item.title} onClick={() => item.onClick(item.id)}/>)}
     </ul>
   );
 }

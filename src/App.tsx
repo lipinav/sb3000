@@ -19,13 +19,12 @@ const LIST = [
 ].map(generateId)
 
 function AppComponent() {
-  console.log('LIST: ', LIST)
   return(
     <Layout>
       <Header />
       <Content>
-        <CardsList list={LIST} onClick={console.log}/>
-        <MyList list={LIST} onClick={console.log}/>
+        <CardsList list={LIST.map((item) => ({...item, onClick: () => {console.log(item.id)}}))}/>
+        <MyList list={LIST.map((item) => ({...item, onClick: () => {console.log(item.id)}}))}/>
       </Content>
     </Layout>
   );

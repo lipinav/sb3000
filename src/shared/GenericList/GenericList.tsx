@@ -3,18 +3,18 @@ import React from 'react';
 interface IItem {
   title: string;
   id: string;
+  onClick: () => void;
 }
 
 interface IMyListProps {
   list: IItem[];
-  onClick: (id: string) => void;
 }
 
-export function MyList({ list, onClick }: IMyListProps) {
+export function MyList({ list }: IMyListProps) {
   return (
     <ul>
       {list.map((item) => (
-        <li onClick={() => onClick(item.id)} key={item.id}>{item.title}</li>
+        <li onClick={() => item.onClick()} key={item.id}>{item.title}</li>
       ))}
     </ul>
   );
