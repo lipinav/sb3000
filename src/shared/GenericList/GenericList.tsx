@@ -1,21 +1,43 @@
 import React from 'react';
 
 interface IItem {
-  title: string;
   id: string;
-  onClick: (id: string) => void;
+  text: string;
+  onClick?: (id: string) => void;
+  className?: string;
+  As?: 'a' | 'li' | 'button' | 'div';
+  href?: string;
 }
 
-interface IMyListProps {
+interface IGenericListProps {
   list: IItem[];
 }
 
-export function MyList({ list }: IMyListProps) {
+// export function MyList({ list }: IGenericListProps) {
+//   return (
+//     <ul>
+//       {list.map((item) => (
+//         <li onClick={() => item.onClick(item.id)} key={item.id}>{item.title}</li>
+//       ))}
+//     </ul>
+//   );
+// }
+
+const noop = () => {};
+
+export function GenericList({ list }: IGenericListProps) {
   return (
-    <ul>
-      {list.map((item) => (
-        <li onClick={() => item.onClick(item.id)} key={item.id}>{item.title}</li>
-      ))}
-    </ul>
+  <>
+    {list.map(({As = 'div', text, onClick = noop, className, id, href}) => (
+      <As
+        className={className}
+        onClick={() => onClick(id)}
+        key={id}
+        href={href}
+      >
+        {text}
+      </As>
+    ))}
+  </>
   );
 }
