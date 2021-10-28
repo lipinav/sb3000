@@ -4,18 +4,19 @@ import { Card } from './Card';
 
 interface ITitle {
   title: string;
+  id: string;
 }
 
-const contentList: Array<ITitle> = [
-  {'title': 'one'},
-  {'title': 'two'},
-  {'title': 'three'},
-]
+interface IMyListProps {
+  list: ITitle[];
+  onClick: (id: string) => void;
+}
 
-export function CardsList(): JSX.Element {
+export function CardsList({ list, onClick }: IMyListProps): JSX.Element {
+  console.log('list: ', list)
   return (
     <ul className={styles.cardsList}>
-      {contentList.map((d, idx) => <Card key={idx} title={d.title} />)}
+      {list.map((item) => <Card id={item.id} title={item.title} onClick={() => onClick(item.id)}/>)}
     </ul>
   );
 }
