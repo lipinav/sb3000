@@ -3,9 +3,8 @@ import styles from './cardslist.css';
 import { Card } from './Card';
 
 interface ITitle {
-  title: string;
+  text: string;
   id: string;
-  onClick: (id: string) => void;
 }
 
 interface IMyListProps {
@@ -16,7 +15,7 @@ export function CardsList({ list }: IMyListProps): JSX.Element {
   console.log('list: ', list)
   return (
     <ul className={styles.cardsList}>
-      {list.map((item) => <Card id={item.id} title={item.title} onClick={() => item.onClick(item.id)}/>)}
+      {list.map((item) => <Card id={item.id} text={item.text}/>)}
     </ul>
   );
 }

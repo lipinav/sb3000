@@ -31,7 +31,7 @@ function AppComponent() {
     <Layout>
       <Header />
       <Content>
-        {/*<CardsList list={list.map(merge({ onClick: handleItemClick}))}/>*/}
+        <CardsList list={list}/>
         <button onClick={handleAdd}>Add element</button>
         <ul>
           <GenericList list={list.map(merge({ onClick: handleItemClick }))}/>

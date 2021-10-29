@@ -11,8 +11,7 @@ import { SaveButton } from './SaveButton';
 
 interface ICardTitle {
   id: string;
-  title: string;
-  onClick: () => void;
+  text: string;
 }
 
 export function Card(props: ICardTitle): JSX.Element {
@@ -20,11 +19,11 @@ export function Card(props: ICardTitle): JSX.Element {
     <li className={styles.card} key={props.id}>
       <div className={styles.textContent}>
         <MetaData />
-        <Title title={props.title}/>
+        <Title text={props.text}/>
       </div>
 
       <Preview />
-      <Menu onClick={() => props.onClick()}/>
+      <Menu />
 
       <div className={styles.controls}>
         <KarmaCounter />
