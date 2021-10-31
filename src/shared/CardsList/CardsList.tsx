@@ -3,23 +3,19 @@ import styles from './cardslist.css';
 import { Card } from './Card';
 
 interface ITitle {
-  title: string;
+  text: string;
+  id: string;
 }
 
-const contentList: Array<ITitle> = [
-  {'title': 'one'},
-  {'title': 'two'},
-  {'title': 'three'},
-]
+interface IMyListProps {
+  list: ITitle[];
+}
 
-export function CardsList() {
+export function CardsList({ list }: IMyListProps): JSX.Element {
+  console.log('list: ', list)
   return (
     <ul className={styles.cardsList}>
-      {
-        contentList.map((function(d, idx) {
-          return (<Card key={idx} title={d.title} />)
-        }))
-      }
+      {list.map((item) => <Card id={item.id} text={item.text}/>)}
     </ul>
   );
 }

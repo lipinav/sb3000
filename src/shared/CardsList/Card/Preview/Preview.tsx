@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './preview.css';
 
-export function Preview() {
+export function Preview(): JSX.Element {
   return (
     <div className={styles.preview}>
       <img

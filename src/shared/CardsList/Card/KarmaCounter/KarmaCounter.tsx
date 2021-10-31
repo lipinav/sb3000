@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './karmacounter.css';
 
-export function KarmaCounter() {
+export function KarmaCounter(): JSX.Element {
   return (
     <div className={styles.karmaCounter}>
       <button className={styles.up}>

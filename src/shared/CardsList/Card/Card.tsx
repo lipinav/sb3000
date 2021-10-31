@@ -10,16 +10,16 @@ import { ShareButton } from './ShareButton';
 import { SaveButton } from './SaveButton';
 
 interface ICardTitle {
-  key: number;
-  title: string;
+  id: string;
+  text: string;
 }
 
-export function Card(props: ICardTitle) {
+export function Card(props: ICardTitle): JSX.Element {
   return (
-    <li className={styles.card} key={props.key}>
+    <li className={styles.card} key={props.id}>
       <div className={styles.textContent}>
         <MetaData />
-        <Title title={props.title}/>
+        <Title text={props.text}/>
       </div>
 
       <Preview />
