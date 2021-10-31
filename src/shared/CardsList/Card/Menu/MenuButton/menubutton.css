@@ -4,7 +4,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transform: rotate(90deg);
   border-radius: 31px;
   background: transparent;
   border: 0;
@@ -17,6 +16,6 @@
 
 @media all and (max-width: 1540px) {
   .menuButton {
-    transform: rotate(0deg);
+    transform: rotate(90deg);
   }
 }

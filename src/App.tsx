@@ -5,6 +5,7 @@ import { Layout } from './shared/Layout';
 import { Header } from './shared/Header';
 import { Content } from './shared/Content';
 import { CardsList } from './shared/CardsList';
+import { CommentsButtonIcon } from './shared/CardsList/Card/CommentsButton/CommentsButtonIcon';
 import { generateId } from './utils/react/generateRandomIndex';
 import { generateRandomString } from './utils/react/generateRandomIndex';
 import { GenericList } from './shared/GenericList';
@@ -32,10 +33,16 @@ function AppComponent() {
       <Header />
       <Content>
         <CardsList list={list}/>
+        {/*
         <button onClick={handleAdd}>Add element</button>
         <ul>
           <GenericList list={list.map(merge({ onClick: handleItemClick }))}/>
         </ul>
+        */}
+        <div>
+          <CommentsButtonIcon />
+          comment
+        </div>
       </Content>
     </Layout>
   );

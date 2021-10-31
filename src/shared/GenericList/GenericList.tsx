@@ -1,4 +1,5 @@
 import React from 'react';
+// import { CommentsButtonIcon } from '../CardsList/Card/CommentsButton/CommentsButtonIcon';
 
 interface IItem {
   id: string;
@@ -23,12 +24,12 @@ interface IGenericListProps {
 //   );
 // }
 
-const noop = () => {};
+const NOOP = () => {};
 
 export function GenericList({ list }: IGenericListProps) {
   return (
   <>
-    {list.map(({As = 'div', text, onClick = noop, className, id, href}) => (
+    {list.map(({As = 'div', text, onClick = NOOP, className, id, href}) => (
       <As
         className={className}
         onClick={() => onClick(id)}

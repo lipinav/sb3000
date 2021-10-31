@@ -54,7 +54,7 @@
 
 @media all and (min-width: 1540px) {
   .card {
-    padding: 0 60px;
+    padding: 20px 60px 0;
     /*
     position: relative;
     */

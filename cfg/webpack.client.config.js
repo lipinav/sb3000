@@ -60,6 +60,22 @@ module.exports = {
         test: GLOBAL_CSS_REGEXP,
         use: ['style-loader', 'css-loader'],
       },
+      {
+        test: /\.(svg|png|jpg|gif)$/i,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192,
+            },
+          },
+        ],
+      },
+      //
+      // {
+      //   test: /\.svg$/,
+      //   use: ['svg-inline-loader'],
+      // },
     ],
   },
   plugins: IS_DEV 

@@ -17,4 +17,7 @@
   .commentsButton {
     display: none;
   }
+  .commentsText {
+    display: none;
+  }
 }
