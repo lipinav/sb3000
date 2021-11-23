@@ -10,3 +10,6 @@ npx tsc home.work3.ts && node home.work3.js
 ## Check task 5 (doesn't work)
 npm run dev
 go to http://localhost:3000/task5
+## Check task 6
+npm i
+npm run dev
