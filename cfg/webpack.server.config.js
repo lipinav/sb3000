@@ -43,20 +43,22 @@ module.exports = {
         use: ['css-loader'],
       },
       {
-        test: /\.(svg|png|jpg|gif)$/i,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: 8192,
-            },
-          },
-        ],
+        test: /\.svg$/,
+        use: ['@svgr/webpack'],
+
+        // test: /\.(svg|png|jpg|gif)$/i,
+        // use: [
+        //   {
+        //     loader: 'url-loader',
+        //     options: {
+        //       limit: 8192,
+        //     },
+        //   },
+        // ],
+
+        // test: /\.svg$/,
+        // use: ['svg-inline-loader'],
       },
-      // {
-      //   test: /\.svg$/,
-      //   use: ['svg-inline-loader'],
-      // },
     ],
   },
   optimization: {

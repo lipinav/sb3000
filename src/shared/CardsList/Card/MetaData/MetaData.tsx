@@ -3,7 +3,7 @@ import styles from './metadata.css';
 
 export function MetaData(): JSX.Element {
   return (
-    <div>
+    <div className={styles.metaData}>
       <div className={styles.userLink}>
         <img
           className={styles.avatar}

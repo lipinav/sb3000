@@ -10,24 +10,26 @@ import { generateId } from './utils/react/generateRandomIndex';
 import { generateRandomString } from './utils/react/generateRandomIndex';
 import { GenericList } from './shared/GenericList';
 import { merge } from './utils/js/merge';
+import { Icon } from './shared/Icon';
 
 // const LIST: Array<ITitle> = [
 const LIST = [
-  {text: 'one', As: 'a' as const},
-  {text: 'two', As: 'a' as const},
-  {text: 'three', As: 'a' as const},
+  {text: 'one', As: 'a' as const, id: "asdf1"},
+  {text: 'two', As: 'a' as const, id: "asdf2"},
+  {text: 'three', As: 'a' as const, id: "asdf3"}
+]
 // ].map((item) => ({ ...item, id: generateRandomString() }))
 // ].map((item) => generateId(item))
-].map(generateId)
+// ].map(generateId)
 
 function AppComponent() {
   const [list, setList] = React.useState(LIST);
   const handleItemClick = (id: string) => {
     setList(list.filter((item) => item.id !== id));
   }
-  const handleAdd = () => {
-    setList(list.concat(generateId({text: generateRandomString(), As: 'a' as const })));
-  }
+  // const handleAdd = () => {
+  //   setList(list.concat(generateId({text: generateRandomString(), As: 'a' as const })));
+  // }
   return(
     <Layout>
       <Header />
@@ -39,10 +41,6 @@ function AppComponent() {
           <GenericList list={list.map(merge({ onClick: handleItemClick }))}/>
         </ul>
         */}
-        <div>
-          <CommentsButtonIcon />
-          comment
-        </div>
       </Content>
     </Layout>
   );

@@ -14,14 +14,12 @@
   fill: var(--orange);
 }
 
-@media all and (min-width: 1540px) {
+@media all and (min-width: 1024px) {
   .karmaCounter > * {
     display: block;
     margin: auto;
     text-align: center;
     width: 30;
-    /*
     padding: 0 0 0 4px;
-    */
   }
 }

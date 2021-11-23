@@ -16,23 +16,6 @@
   padding: 22px 20px 13px;
 }
 
-.userLink {
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
-  height: 20px;
-  padding: 0 6px 0 0;
-}
-
-.userLink:hover a {
-  text-decoration: underline;
-}
-
-.createdAt,
-.createdAt * {
-  color: var(--grey99);
-}
-
 .controls {
   display: flex;
   padding: 10px 20px;
@@ -52,9 +35,9 @@
 }
 
 
-@media all and (min-width: 1540px) {
+@media all and (min-width: 1024px) {
   .card {
-    padding: 20px 60px 0;
+    padding: 20px 40px 0;
     /*
     position: relative;
     */
@@ -74,20 +57,11 @@
     order: 0;
   }
 
-  .userLink {
-    order: 1;
-  }
-
-  .createdAt,
-  .createdAt * {
-    order: 0;
-    padding: 0 6px 0 0;
-  }
 
   .controls {
     position: absolute;
-    top: 22px;
-    right: 60px;
+    top: 40px;
+    right: 15px;
   }
 
   .actions {
