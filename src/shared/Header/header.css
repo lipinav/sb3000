@@ -3,12 +3,11 @@
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
-    padding: 40px;
+    padding: 67px 40px;
   }
 }
 
-@media all and (min-width: 1540px) {
+@media all and (min-width: 1024px) {
   .header {
-    padding: 67px 0;
   }
 }

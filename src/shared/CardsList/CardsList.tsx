@@ -12,7 +12,6 @@ interface IMyListProps {
 }
 
 export function CardsList({ list }: IMyListProps): JSX.Element {
-  console.log('list: ', list)
   return (
     <ul className={styles.cardsList}>
       {list.map((item) => <Card id={item.id} text={item.text}/>)}

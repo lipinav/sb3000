@@ -8,6 +8,9 @@ interface IItem {
   className?: string;
   As?: 'a' | 'li' | 'button' | 'div';
   href?: string;
+  icon?: React.ReactNode;
+  children?: React.ReactNode;
+  breakNode?: React.ReactNode;
 }
 
 interface IGenericListProps {
@@ -29,14 +32,17 @@ const NOOP = () => {};
 export function GenericList({ list }: IGenericListProps) {
   return (
   <>
-    {list.map(({As = 'div', text, onClick = NOOP, className, id, href}) => (
+    {list.map(({As = 'div', text, onClick = NOOP, className, id, href, children, breakNode, icon}) => (
       <As
         className={className}
         onClick={() => onClick(id)}
         key={id}
         href={href}
       >
+        {icon}
+        {breakNode}
         {text}
+        {children}
       </As>
     ))}
   </>
