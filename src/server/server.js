@@ -15,6 +15,15 @@ app.get('/', (req, res) => {
   );
 });
 
+app.get('/auth', (req, res) => {
+  // req.query.code;
+  res.send(
+    indexTemplate(    // template would send from server
+      ReactDOM.renderToString(App())
+    ),
+  );
+});
+
 app.listen(3000, () => {
   console.log('Servers started on http://localhost:3000');
 });

@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './text.css';
 import classNames from 'classnames';
 
-export enum EColor {
+export enum EColors {
   black = 'black',
   orange = 'orange',
   green = 'green',
@@ -24,14 +24,14 @@ interface ITextProps {
   mobileSize?: TSizes;
   tabletSize?: TSizes;
   desktopSize?: TSizes;
-  color?: EColor;
+  color?: EColors;
   bold?: boolean;
 }
 
 export function Text(props: ITextProps) {
   const {
     As = 'span',
-    color = EColor.black,
+    color = EColors.black,
     bold = false,
     children,
     size,

@@ -5,6 +5,7 @@ import ComplainIcon from '../Icons/complainIcon.svg';
 import HideIcon from '../Icons/hideIcon.svg';
 import SaveAdaptiveIcon from '../Icons/saveAdaptiveIcon.svg';
 import ShareAdaptiveIcon from '../Icons/shareAdaptiveIcon.svg';
+import AvatarAnonIcon from '../Icons/avatarAnonIcon.svg';
 
 // interface IIconComponents {
 //     [N: string]?: React.ReactNode;
@@ -22,12 +23,13 @@ const iconComponents: Record<string, React.ComponentType<TProps>> = {
     complain: ComplainIcon,
     hide: HideIcon,
     save: SaveAdaptiveIcon,
-    share: ShareAdaptiveIcon
+    share: ShareAdaptiveIcon,
+    avatarAnon: AvatarAnonIcon
 }
 
 interface IIconProps {
   name: string;
-  size?: 16 | 18 | 20 | 22 | 32;
+  size?: 16 | 18 | 20 | 22 | 32 | 50;
   viewBox?: string,
   className?: string;
 }
