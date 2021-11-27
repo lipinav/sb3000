@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './dropdown.css';
-import { useIsMounted } from '../../../notes/5.2.hooks';
+import { useIsMounted } from '../../hooks/useIsMounted';
 
 interface IDropdownProps {
   button: React.ReactNode;
