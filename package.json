@@ -9,7 +9,9 @@
   "scripts": {
     "build:dev": "env NODE_ENV=development webpack --config webpack.config.js",
     "build:prod": "env NODE_ENV=production webpack --config webpack.config.js",
-    "dev": "env NODE_ENV=development node bin/dev.js",
+    "dev": "env NODE_ENV=development CLIENT_ID='mVfk2BP9-6Y3TnfZQqPu9g' node bin/dev.js",
+    "dev-noneenv": "env node bin/dev.js",
+    "prod": "env NODE_ENV=production node bin/dev.js",
     "test": "jest",
     "lint": "eslint . --ext .ts --ext .tsx --ext .jsx"
   },
