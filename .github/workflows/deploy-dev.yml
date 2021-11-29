@@ -66,10 +66,10 @@ jobs:
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
           build-args: |
-            NODE_ENV: development
-            CLIENT_ID: ${{ secrets.CLIENT_ID }}
-            SECRET: ${{ secrets.SECRET }}
-            REDIRECT: ${{ secrets.REDIRECT }}
+            NODE_ENV=development
+            CLIENT_ID=${{ secrets.CLIENT_ID }}
+            SECRET=${{ secrets.SECRET }}
+            REDIRECT=${{ secrets.REDIRECT }}
       -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}

@@ -15,7 +15,7 @@ ENV \
   NODE_ENV=$NODE_ENV \
   CLIENT_ID=$CLIENT_ID \
   SECRET=$SECRET \
-  REDIRECT=REDIRECT
+  REDIRECT=$REDIRECT
 
 RUN useradd -s /bin/false -md /app appuser
 WORKDIR /app
