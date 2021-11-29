@@ -6,7 +6,8 @@ const GLOBAL_CSS_REGEXP = /\.global\.css$/;
 const COMMON_PLUGINS = [ new DefinePlugin(
   {
     'process.env.CLIENT_ID': `'${process.env.CLIENT_ID}'`,
-    'process.env.REDIRECT_URI': `'${process.env.REDIRECT_URI}'`
+    'process.env.REDIRECT_URI': `'${process.env.REDIRECT_URI}'`,
+    'process.env.REDDIT_SECRET': `'${process.env.REDDIT_SECRET}'`
   }
 )]
 
