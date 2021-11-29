@@ -22,7 +22,9 @@ jobs:
       -
         run: node --version
       -
-        run: npm --version
+        run: npm i --legacy-peer-deps
+      -
+        run: npm run build:dev
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v1
