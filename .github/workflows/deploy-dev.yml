@@ -70,7 +70,7 @@ jobs:
             NODE_ENV=development
             CLIENT_ID=${{ secrets.CLIENT_ID }}
             SECRET=${{ secrets.SECRET }}
-            REDIRECT=${{ secrets.REDIRECT }}
+            REDIRECT_URI=${{ secrets.REDIRECT_URI }}
       -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
