@@ -63,7 +63,7 @@ jobs:
           file: ./Dockerfile
           builder: ${{ steps.buildx.outputs.name }}
           push: true
-          tags: ghcr.io/lipinav/deploy/app:${{ steps.vars.outputs.tag }}
+          tags: ghcr.io/lipinav/sb3000/app:${{ steps.vars.outputs.tag }}
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
           build-args: |
@@ -83,6 +83,6 @@ jobs:
           key: ${{ secrets.KEY }}
           port: ${{ secrets.PORT }}
           script: |
-            docker pull ghcr.io/lipinav/deploy/app:${{ steps.vars.outputs.tag }}
+            docker pull ghcr.io/lipinav/sb3000/app:${{ steps.vars.outputs.tag }}
             docker rm -f sb3000-prod
-            docker run -d --name sb3000-prod -p 580:3000 --entrypoint sh ghcr.io/lipinav/deploy/app:${{ steps.vars.outputs.tag }} run prod
+            docker run -d --name sb3000-prod -p 580:3000 --entrypoint sh ghcr.io/lipinav/sb3000/app:${{ steps.vars.outputs.tag }} run prod
