@@ -9,13 +9,13 @@ ARG \
   NODE_ENV=development \
   CLIENT_ID='' \
   SECRET='' \
-  REDIRECT='https://localhost:3000'
+  REDIRECT_URI='https://localhost:3000'
 
 ENV \
   NODE_ENV=$NODE_ENV \
   CLIENT_ID=$CLIENT_ID \
   SECRET=$SECRET \
-  REDIRECT=$REDIRECT
+  REDIRECT_URI=$REDIRECT_URI
 
 RUN useradd -s /bin/false -md /app appuser
 WORKDIR /app
