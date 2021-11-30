@@ -10,20 +10,24 @@ interface IUserData {
 export function useUserData () {
   const [data, setData] = useState<IUserData>({});
   const token = useContext(tokenContext);
-  console.log('axios.get');
   useEffect(() => {
-    axios.get(
-      'https://oauth.reddit.com/api/v1/me',
-      {  // config
-        headers: { Authorization: `bearer ${token}` }
-      }
-    )
-      .then((resp) => {
-          console.log('resp.data: ', resp.data);
-          const userData = resp.data;
-          setData({ name: userData.name, iconImg: userData.icon_img })
-      })
-      .catch((err) => {console.log('err: ', err)});
+    if ( token !== 'undefined' && token !== '' ) {
+      axios.get(
+        'https://oauth.reddit.com/api/v1/me',
+        {  // config
+          headers: {
+            'Authorization': `bearer ${token}`,
+            'Content-Type': 'application/x-www-form-urlencoded'
+          }
+        }
+      )
+        .then((resp) => {
+            console.log('resp.data: ', resp.data);
+            const userData = resp.data;
+            setData({ name: userData.name, iconImg: userData.icon_img })
+        })
+        .catch((err) => {console.log('err: ', err)});
+    }
   }, [token])
 
   console.log('token: ', token);

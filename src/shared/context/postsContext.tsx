@@ -1,24 +1,39 @@
 import React from 'react';
-import { usePosts } from '../../hooks/usePostsData';
+import { usePostsData } from '../../hooks/usePostsData';
+
+type TPosts = string | number | Record<string, unknown> | null | Array<string> | undefined;
+
+interface IPosts {
+  thumbnail?: string,
+  author?: string,
+  title?: string,
+  name?: string,
+  created_utc?: number,
+  id?: string,
+  selftext?: string,
+  num_comments?: number,
+  preview?: Record<string, unknown>,
+  score?: number,
+  content_categories?: Array<string>
+  [N: string]: TPosts
+}
 
 interface IPostsContext {
-<<<<<<< Updated upstream:src/shared/context/postsContext.tsx
-  name?: string
-=======
-  after?: string | null,
+  after?: string,
   dist?: number,
-  modhash?: string | null,
-  geo_filter?: string | null,
-  children?: Array<object>
->>>>>>> Stashed changes:src/shared/context/bestPostsContext.tsx
+  children?: {
+    kind?: string,
+    data?: Array<IPosts>
+  }
 }
+
 export const postsContext = React.createContext<IPostsContext>({});
 
 interface IPostsContentProvider {
   children: React.ReactNode
 }
 export function PostsContextProvider({ children }: IPostsContentProvider) {
-  const [posts] = usePosts();
+  const [posts] = usePostsData();
   return (
     <postsContext.Provider value={posts}>
       {children}

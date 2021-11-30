@@ -9,7 +9,7 @@
   "scripts": {
     "build:dev": "env NODE_ENV=development webpack --config webpack.config.js",
     "build:prod": "env NODE_ENV=production webpack --config webpack.config.js",
-    "dev": "env NODE_ENV=development CLIENT_ID='mVfk2BP9-6Y3TnfZQqPu9g' REDDIT_SECRET='1z6MK66la7ys43XgDniJHsIZxu3IMw' REDIRECT_URI='http://localhost:3000/auth' node bin/dev.js",
+    "dev": "env NODE_ENV=development CLIENT_ID='mVfk2BP9-6Y3TnfZQqPu9g' REDDIT_SECRET='1z6MK66la7ys43XgDniJHsIZxu3IMw' REDIRECT_URI='http://localhost:4000/auth' node bin/dev.js",
     "dev-noneenv": "env node bin/dev.js",
     "prod": "env NODE_ENV=production node bin/dev.js",
     "test": "jest",

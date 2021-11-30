@@ -17,12 +17,19 @@ app.get('/', (req, res) => {
 });
 
 app.get('/auth', (req, res) => {
+  console.log(`code: ${req.query.code}`);
+  console.log(`uri: ${process.env.REDIRECT_URI}`);
+  console.log(`secret: ${process.env.REDDIT_SECRET}`);
+  console.log(`client_id: ${process.env.CLIENT_ID}`);
   axios.post(
     'https://www.reddit.com/api/v1/access_token',  // url
-    `grant_type=authorization_code&code=${req.query.code}&redirect_uri=http://localhost:3000/auth`,  // data
+    `grant_type=authorization_code&code=${req.query.code}&redirect_uri=${process.env.REDIRECT_URI}`,  // data
     {    // config
       auth: { username: process.env.CLIENT_ID, password: process.env.REDDIT_SECRET },
-      headers: { 'Content-type': 'application/x-www-form-urlencoded' }
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'User-Agent': 'linux:sb3000:v0.2.0 (by /u/lipinavpost)'
+      }
     }
   )
     .then(({data}) => {
@@ -37,6 +44,6 @@ app.get('/auth', (req, res) => {
     .catch(console.log());
 });
 
-app.listen(3000, () => {
-  console.log('Servers started on http://localhost:3000');
+app.listen(4000, () => {
+  console.log('Servers started on http://localhost:4000');
 });
