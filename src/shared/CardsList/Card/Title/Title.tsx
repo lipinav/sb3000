@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './title.css';
 
 interface ITitle {
-  text: string;
+  text?: string;
 }
 
 export function Title(props: ITitle): JSX.Element {

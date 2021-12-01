@@ -10,6 +10,7 @@ import { CardsList } from './shared/CardsList';
 import { tokenContext } from './shared/context/tokenContext';
 import { UserContextProvider } from './shared/context/userContext';
 import { PostsContextProvider } from './shared/context/postsContext';
+import {AuthorContextProvider} from './shared/context/authorContext';
 // import { generateId } from './utils/react/generateRandomIndex';
 // import { generateRandomString } from './utils/react/generateRandomIndex';
 // import { GenericList } from './shared/GenericList';
@@ -46,13 +47,15 @@ function AppComponent() {
           <Header />
           <Content>
             <PostsContextProvider>
-              <CardsList list={list}/>
-            {/*
-            <button onClick={handleAdd}>Add element</button>
-            <ul>
-              <GenericList list={list.map(merge({ onClick: handleItemClick }))}/>
-            </ul>
-            */}
+              <AuthorContextProvider>
+                <CardsList list={list}/>
+                {/*
+                <button onClick={handleAdd}>Add element</button>
+                <ul>
+                  <GenericList list={list.map(merge({ onClick: handleItemClick }))}/>
+                </ul>
+                */}
+              </AuthorContextProvider>
             </PostsContextProvider>
           </Content>
         </Layout>
@@ -60,5 +63,6 @@ function AppComponent() {
     </tokenContext.Provider>
   );
 }
+
 
 export const App = hot(() => <AppComponent />);

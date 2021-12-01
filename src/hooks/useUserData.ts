@@ -24,13 +24,13 @@ export function useUserData () {
         .then((resp) => {
             console.log('resp.data: ', resp.data);
             const userData = resp.data;
-            setData({ name: userData.name, iconImg: userData.icon_img })
+            const iconUrl = new URL(userData.icon_img);
+            const icon = iconUrl.origin+iconUrl.pathname;
+            setData({ name: userData.name, iconImg: icon })
         })
         .catch((err) => {console.log('err: ', err)});
     }
   }, [token])
 
-  console.log('token: ', token);
-  console.log('data: ', data);
   return [data]
 }

@@ -44,6 +44,6 @@ app.get('/auth', (req, res) => {
     .catch(console.log());
 });
 
-app.listen(4000, () => {
-  console.log('Servers started on http://localhost:4000');
+app.listen(3000, () => {
+  console.log('Servers started on http://localhost:3000');
 });

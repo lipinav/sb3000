@@ -1,7 +1,6 @@
 import React from 'react';
 import { usePostsData } from '../../hooks/usePostsData';
-
-type TPosts = string | number | Record<string, unknown> | null | Array<string> | undefined;
+type TPosts = string | number | Record<string, unknown> | null | Array<string> | Array<IPostsChildren> | undefined;
 
 interface IPosts {
   thumbnail?: string,
@@ -14,20 +13,24 @@ interface IPosts {
   num_comments?: number,
   preview?: Record<string, unknown>,
   score?: number,
-  content_categories?: Array<string>
+  content_categories?: Array<string>,
+  icon_url?: string;
   [N: string]: TPosts
 }
 
-interface IPostsContext {
-  after?: string,
-  dist?: number,
-  children?: {
-    kind?: string,
-    data?: Array<IPosts>
-  }
+interface IPostsChildren {
+  kind?: string,
+  data?: IPosts
 }
 
-export const postsContext = React.createContext<IPostsContext>({});
+interface IPostsContextData {
+  after?: string,
+  dist?: number,
+  [N: string]: TPosts,
+  children?: Array<IPostsChildren>
+}
+
+export const postsContext = React.createContext<IPostsContextData>({});
 
 interface IPostsContentProvider {
   children: React.ReactNode
