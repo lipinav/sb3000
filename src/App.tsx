@@ -30,8 +30,6 @@ const LIST = [
 function AppComponent() {
   const [list, setList] = useState(LIST);
   const [token] = useToken();
-  const [posts] = usePostsData();
-  console.log('[src/App.tsx] posts: ',posts);
 
   const handleItemClick = (id: string) => {
     setList(list.filter((item) => item.id !== id));

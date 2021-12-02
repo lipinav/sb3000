@@ -44,11 +44,13 @@ interface IAuthor {
 export const authorContext = React.createContext<IAuthor[]>([]);
 
 interface IAuthorContextProvider {
-    children: React.ReactNode
+    children?: React.ReactNode
 }
-export function AuthorContextProvider({children}: IAuthorContextProvider) {
+export function AuthorContextProvider({children}: IAuthorContextProvider): JSX.Element {
     const [author] = useAuthorData();
-    console.log('[src/hooks/useAuthorData.ts] author: ', author);
+    console.group(`src/shared/context/authorContext.tsx`);
+    console.log(`author                  count: ${author.length}   data: ${JSON.stringify(author)}`);
+    console.groupEnd();
     return (
         <authorContext.Provider value={author}>
             {children}

@@ -1,3 +1,4 @@
+/* eslint-env node */
 const path = require('path');
 const { DefinePlugin } = require('webpack');
 const nodeExternals = require('webpack-node-externals');

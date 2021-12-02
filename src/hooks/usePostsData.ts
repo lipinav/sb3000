@@ -68,7 +68,5 @@ export function usePostsData () {
     }
   }, [token]);
 
-  console.log('[src/hooks/usePostsData.ts] useEffect posts bottom: ', posts);
-
   return [posts]
 }

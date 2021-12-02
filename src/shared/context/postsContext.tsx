@@ -33,7 +33,7 @@ interface IPostsContextData {
 export const postsContext = React.createContext<IPostsContextData>({});
 
 interface IPostsContentProvider {
-  children: React.ReactNode
+  children?: React.ReactNode
 }
 export function PostsContextProvider({ children }: IPostsContentProvider) {
   const [posts] = usePostsData();

@@ -22,7 +22,6 @@ export function useUserData () {
         }
       )
         .then((resp) => {
-            console.log('resp.data: ', resp.data);
             const userData = resp.data;
             const iconUrl = new URL(userData.icon_img);
             const icon = iconUrl.origin+iconUrl.pathname;
