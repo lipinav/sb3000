@@ -5,6 +5,7 @@ on:
     branches:
       - 'master'
       - '8.context'
+      - '8.context-failed'
 
 jobs:
   docker:
