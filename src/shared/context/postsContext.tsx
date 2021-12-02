@@ -30,7 +30,7 @@ interface IPostsContextData {
   children?: Array<IPostsChildren>
 }
 
-export const postsContext = React.createContext<IPostsContextData>({});
+export const postsContext = React.createContext<IPosts[]>([]);
 
 interface IPostsContentProvider {
   children?: React.ReactNode

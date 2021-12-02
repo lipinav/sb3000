@@ -36,6 +36,13 @@ interface IPostsChildren {
   kind?: string;
   data?: IPosts;
 }
+
+interface IPostsContextData {
+  after?: string,
+  dist?: number,
+  [N: string]: TPosts,
+  children?: Array<IPostsChildren>
+}
 interface IAuthor {
   thumbnail?: string;
   author?: string;
@@ -57,38 +64,50 @@ export function CardsList({ list }: IMyListProps): JSX.Element {
   const posts = useContext(postsContext);
   console.group('src/shared/CardsList/CardsList.tsx')
   console.log(`posts                  count: ${Object.keys(posts).length} data: ${JSON.stringify(posts)}`);
-  const authorContextList = useContext(authorContext);
-  console.log(`authorContextList:      count: ${authorContextList.length} data: ${JSON.stringify(authorContextList)}`);
+//  const authorContextList = useContext(authorContext);
+//  console.log(`authorContextList:      count: ${authorContextList.length} data: ${JSON.stringify(authorContextList)}`);
 
-  const requiredList: Array<IAuthor> = authorContextList.map(item => R.pick([
-    'id', 'title', 'author', 'created_utc', 'icon_img', 'num_comments',
-    'score', 'thumbnail', 'content_categories'], item));
+//  const requiredList: Array<IPosts> = [];
+//  if (posts.children !== [] && typeof posts.children !== 'undefined') {
+//    const requiredList: Array<IPosts> = posts.children.map(item => {
+////      console.log(`item.data      : ${JSON.stringify(item.data)}`);
+//      if (typeof item.data !== 'undefined') {
+//        return R.pick([
+//          'id', 'title', 'author', 'created_utc', 'icon_img', 'num_comments',
+//          'score', 'thumbnail', 'content_categories'], item.data)
+//      } else {
+//        console.log(`undefined`);
+//        return [];
+//      }
+//    });
+//    console.log(`requiredList        count: ${requiredList.length} data: ${JSON.stringify(requiredList)}`);
+//  }
+//  console.log(`requiredList        count: ${requiredList.length} data: ${JSON.stringify(requiredList)}`);
 
 //  let cardUrl;
-//  if (authorContextList !== []) {
-  const cardUrl = requiredList.map((
+//  if (requiredList) {
+  const cardUrl = posts.map((
         {
           id, title, author,
           created_utc, icon_img,
           num_comments, score,
           thumbnail, content_categories
         }
-      ) => <Card
+      ) => <Card key={id}
         id={id}
         text={title}
         cardImg={thumbnail}
         numComments={num_comments}
         createdAt={created_utc}
         authorName={author}
-        avatar={icon_img}
+        avatar={undefined}
         karma={score}
         contentCategories={content_categories}
       />)
 //  } else {
-//    cardUrl = list.map((item) => <Card id={item.id} text={item.text}/>)
+//    const cardUrl = list.map((item) => <Card id={item.id} text={item.text}/>)
 //  }
   // console.log('src/shared/CardsList/CardsList.tsx cardUrl:', cardUrl);
-  console.log(`requiredList             count: ${requiredList.length} data: ${JSON.stringify(requiredList)}`);
   console.groupEnd()
 
   return (

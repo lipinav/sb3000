@@ -48,9 +48,9 @@ interface IAuthorContextProvider {
 }
 export function AuthorContextProvider({children}: IAuthorContextProvider): JSX.Element {
     const [author] = useAuthorData();
-    console.group(`src/shared/context/authorContext.tsx`);
-    console.log(`author                  count: ${author.length}   data: ${JSON.stringify(author)}`);
-    console.groupEnd();
+//    console.group(`src/shared/context/authorContext.tsx`);
+//    console.log(`author                  count: ${author.length}   data: ${JSON.stringify(author)}`);
+//    console.groupEnd();
     return (
         <authorContext.Provider value={author}>
             {children}
