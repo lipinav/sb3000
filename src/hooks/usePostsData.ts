@@ -2,8 +2,20 @@ import { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import { tokenContext } from '../shared/context/tokenContext';
 import * as R from 'ramda';
+import {pureUrl} from '../utils/js/pureUrl';
 
-type TPosts = string | number | Record<string, unknown> | null | Array<string> | Array<IPostsChildren> | undefined;
+type TPostValue = string | number | Record<string, unknown> | null | Array<string> | undefined;
+
+interface IAuthor {
+  author?: string;
+  icon_img?: string;
+  [N: string]: TPostValue;
+}
+
+interface IAuthorData {
+  kind?: string;
+  data?: IAuthor;
+}
 
 interface IPosts {
   thumbnail?: string;
@@ -19,7 +31,14 @@ interface IPosts {
   score?: number;
   content_categories?: Array<string>;
   icon_url?: string;
-  [N: string]: TPosts;
+  icon_img?: string;
+  [N: string]: TPostValue;
+}
+
+interface IPostsDataPicked {
+  after?: string;
+  dist?: number;
+  children: Array<IPosts>;
 }
 
 interface IPostsChildren {
@@ -30,7 +49,6 @@ interface IPostsChildren {
 interface IPostsData {
   after?: string;
   dist?: number;
-  [N: string]: TPosts;
   children?: Array<IPostsChildren>;
 }
 
@@ -40,12 +58,45 @@ interface IPostsResp {
 }
 
 export function usePostsData () {
-  const [posts, setPostsData] = useState<IPostsData>({});
-  const [postsOnly, setPostsOnly] = useState<IPosts[]>([]);
+  // const [postsData, setPostsData] = useState<IPostsDataPicked>({});
+  const [postsAndAuthor, setPostsAndAuthor] = useState<IPostsDataPicked>(
+    {after: 'undefined', dist: 0, children: []}
+  );
   const token = useContext(tokenContext);
-  console.group('src/hooks/usePostsData.ts');
-  console.log(`started`);
 
+  function addAuthorData(posts: IPostsDataPicked) {
+     if (typeof posts?.children !== 'undefined' && !!posts?.children) {
+       posts.children.forEach((item) => {
+         const axiosUrl = `https://oauth.reddit.com/user/${item.author}/about`;
+         axios.get(
+           axiosUrl,
+           {  // config
+             headers: {
+               'Authorization': `bearer ${token}`,
+               'Content-Type': 'application/x-www-form-urlencoded'
+             },
+             timeout: 5000
+           }
+         )
+           .then((resp) => {
+             const authorData: IAuthorData = resp.data;
+             if (typeof authorData.data?.icon_img !== 'undefined') {
+               const icon = pureUrl(authorData.data.icon_img);
+               setPostsAndAuthor(prevState => {
+                   return {
+                     after: posts.after,
+                       dist: posts.dist,
+                     children: prevState.children.concat({...item, icon_img: icon})
+                   }
+               })
+             }
+           })
+           .catch((err) => {
+             console.log('[src/hooks/usePostsData.ts] Axios err: ', err)
+           });
+       })
+     }
+   }
 
   useEffect(() => {
     if ( token !== 'undefined' && token !== '' ) {
@@ -59,40 +110,38 @@ export function usePostsData () {
         }
       )
         .then((resp) => {
-            const postsData: IPostsResp = resp.data;
-            if (typeof postsData !== 'undefined') {
-              if (typeof postsData.data !== 'undefined') {
-                setPostsData({
-                  after: postsData.data.after,
-                  dist: postsData.data.dist,
-                  children: postsData.data.children
-                })
-
-                if (postsData.data.children !== [] && typeof postsData.data.children !== 'undefined') {
-                  const postsOnlyResp: Array<IPosts> = postsData.data.children.map(item => {
-//      console.log(`item.data      : ${JSON.stringify(item.data)}`);
+            const postsResp: IPostsResp = resp.data;
+                if (!!postsResp?.data?.children?.length && typeof postsResp?.data?.children !== 'undefined') {
+                  const postsOnlyResp: Array<IPosts> = postsResp.data.children.map(item => {
                     if (typeof item.data !== 'undefined') {
                       return R.pick([
-                        'id', 'title', 'author', 'created_utc', 'icon_img', 'num_comments',
-                        'score', 'thumbnail', 'content_categories'], item.data)
+                      'thumbnail',
+                      'author',
+                      'title',
+                      'name',
+                      'created_utc',
+                      'id',
+                      'selftext',
+                      'selftext_html',
+                      'num_comments',
+                      'preview',
+                      'score',
+                      'content_categories',
+                      'icon_url',
+                    ], item.data)
                     } else {
-                      console.log(`undefined`);
                       return [];
                     }
                   });
-                  console.log(`postsOnlyRest: ${Object.keys(postsOnlyResp).length} ${JSON.stringify(postsOnlyResp)}`)
-                  setPostsOnly(postsOnlyResp);
+                  addAuthorData({
+                    after: postsResp.data.after,
+                    dist: postsResp.data.dist,
+                    children: postsOnlyResp
+                  });
                 }
-
-
-              }
-            }
         })
         .catch((err) => {console.log('[src/hooks/usePostsData.ts] Axios err: ', err)});
     }
   }, [token]);
-
-  console.log(`finished`);
-  console.groupEnd();
-  return [postsOnly]
+  return [postsAndAuthor]
 }

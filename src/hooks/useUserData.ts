@@ -1,6 +1,7 @@
 import { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import { tokenContext } from '../shared/context/tokenContext';
+import {pureUrl} from '../utils/js/pureUrl';
 
 interface IUserData {
   name?: string;
@@ -23,13 +24,12 @@ export function useUserData () {
       )
         .then((resp) => {
             const userData = resp.data;
-            const iconUrl = new URL(userData.icon_img);
-            const icon = iconUrl.origin+iconUrl.pathname;
-            setData({ name: userData.name, iconImg: icon })
+            // const iconUrl = new URL(userData.icon_img);
+            // const icon = iconUrl.origin+iconUrl.pathname;
+            setData({ name: userData.name, iconImg: pureUrl(userData.icon_img) })
         })
         .catch((err) => {console.log('err: ', err)});
     }
   }, [token])
-
   return [data]
 }

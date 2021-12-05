@@ -34,6 +34,7 @@ app.get('/auth', (req, res) => {
   )
     .then(({data}) => {
       // req.query.code;
+      console.log(`access_token: ${JSON.stringify(data.access_token)}`);
       res.send(
         indexTemplate(    // template would send from server
           ReactDOM.renderToString(App()),

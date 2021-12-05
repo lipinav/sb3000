@@ -10,34 +10,17 @@ import { CardsList } from './shared/CardsList';
 import { tokenContext } from './shared/context/tokenContext';
 import { UserContextProvider } from './shared/context/userContext';
 import { PostsContextProvider } from './shared/context/postsContext';
-import {AuthorContextProvider} from './shared/context/authorContext';
-// import { generateId } from './utils/react/generateRandomIndex';
-// import { generateRandomString } from './utils/react/generateRandomIndex';
-// import { GenericList } from './shared/GenericList';
-// import { merge } from './utils/js/merge';
-// import { Icon } from './shared/Icon';
 
-// const LIST: Array<ITitle> = [
 const LIST = [
   {text: 'one', As: 'a' as const, id: "asdf1"},
   {text: 'two', As: 'a' as const, id: "asdf2"},
   {text: 'three', As: 'a' as const, id: "asdf3"}
 ]
-// ].map((item) => ({ ...item, id: generateRandomString() }))
-// ].map((item) => generateId(item))
-// ].map(generateId)
 
 function AppComponent() {
   const [list, setList] = useState(LIST);
   const [token] = useToken();
   const [posts] = usePostsData();
-
-  const handleItemClick = (id: string) => {
-    setList(list.filter((item) => item.id !== id));
-  }
-  // const handleAdd = () => {
-  //   setList(list.concat(generateId({text: generateRandomString(), As: 'a' as const })));
-  // }
 
   return(
     <tokenContext.Provider value={token}>
@@ -46,15 +29,7 @@ function AppComponent() {
           <Header />
           <Content>
             <PostsContextProvider>
-              <AuthorContextProvider>
-                <CardsList list={list}/>
-                {/*
-                <button onClick={handleAdd}>Add element</button>
-                <ul>
-                  <GenericList list={list.map(merge({ onClick: handleItemClick }))}/>
-                </ul>
-                */}
-              </AuthorContextProvider>
+              <CardsList list={list}/>
             </PostsContextProvider>
           </Content>
         </Layout>
@@ -62,6 +37,5 @@ function AppComponent() {
     </tokenContext.Provider>
   );
 }
-
 
 export const App = hot(() => <AppComponent />);
