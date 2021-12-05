@@ -69,7 +69,7 @@ jobs:
           build-args: |
             NODE_ENV=production
             CLIENT_ID=${{ secrets.CLIENT_ID }}
-            SECRET=${{ secrets.SECRET }}
+            REDDIT_SECRET=${{ secrets.REDDIT_SECRET }}
             REDIRECT_URI=${{ secrets.REDIRECT_URI }}
       -
         name: Image digest
