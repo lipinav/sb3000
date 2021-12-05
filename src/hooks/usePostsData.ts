@@ -13,6 +13,7 @@ interface IPosts {
   created_utc?: number;
   id?: string;
   selftext?: string;
+  selftext_html?: string;
   num_comments?: number;
   preview?: Record<string, unknown>;
   score?: number;
@@ -45,6 +46,7 @@ export function usePostsData () {
   console.group('src/hooks/usePostsData.ts');
   console.log(`started`);
 
+
   useEffect(() => {
     if ( token !== 'undefined' && token !== '' ) {
       axios.get(
@@ -66,8 +68,8 @@ export function usePostsData () {
                   children: postsData.data.children
                 })
 
-                if (postsData.data.children !== [] && typeof posts.children !== 'undefined') {
-                  const postsOnlyResp: Array<IPosts> = posts.children.map(item => {
+                if (postsData.data.children !== [] && typeof postsData.data.children !== 'undefined') {
+                  const postsOnlyResp: Array<IPosts> = postsData.data.children.map(item => {
 //      console.log(`item.data      : ${JSON.stringify(item.data)}`);
                     if (typeof item.data !== 'undefined') {
                       return R.pick([

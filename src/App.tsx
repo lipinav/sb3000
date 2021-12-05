@@ -30,6 +30,7 @@ const LIST = [
 function AppComponent() {
   const [list, setList] = useState(LIST);
   const [token] = useToken();
+  const [posts] = usePostsData();
 
   const handleItemClick = (id: string) => {
     setList(list.filter((item) => item.id !== id));

@@ -10,6 +10,7 @@ interface IPosts {
   created_utc?: number,
   id?: string,
   selftext?: string,
+  selftext_html?: string,
   num_comments?: number,
   preview?: Record<string, unknown>,
   score?: number,

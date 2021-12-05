@@ -11,6 +11,7 @@ import { SaveButton } from './SaveButton';
 
 interface ICardTitle {
     id?: string;
+    title?: string;
     text?: string;
     cardImg?: string,
     numComments?: number;
@@ -21,12 +22,12 @@ interface ICardTitle {
     avatar?: string;
 }
 
-export function Card({ id, text, cardImg, numComments, contentCategories, karma, createdAt, authorName, avatar }: ICardTitle): JSX.Element {
+export function Card({ id, title, text, cardImg, numComments, contentCategories, karma, createdAt, authorName, avatar }: ICardTitle): JSX.Element {
   return (
     <li className={styles.card} key={id}>
       <div className={styles.textContent}>
         <MetaData author={authorName} avatar={avatar} createdAt={createdAt}/>
-        <Title text={text}/>
+        <Title title={title} text={text}/>
       </div>
 
       <Preview cardImg={cardImg}/>
