@@ -1,0 +1,23 @@
+.form {
+
+}
+
+.textarea {
+  height: 100%;
+  width: 100%;
+
+}
+
+.button {
+  display: block;
+  margin-right: 0;
+  margin-left: auto;
+  background-color: var(--orange);
+  border: none;
+  color: white;
+  padding: 17px 50px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  cursor: pointer;
+}

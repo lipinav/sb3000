@@ -1,14 +1,18 @@
 import React, {useEffect, useState} from 'react';
 import styles from './title.css';
 import { Posts } from '../../../Posts';
+import {useComments} from '../../../../hooks/useComments';
 
 interface ITitle {
+  id?: string;
   title?: string;
   text?: string;
 }
 
-export function Title({title, text}: ITitle): JSX.Element {
+export function Title({id, title, text}: ITitle): JSX.Element {
   const [isModalOpened, setIsModalOpened] = useState(false);
+  const [comments] = useComments(id);
+  console.log(`id: ${id} Comments: ${comments?.length}`);
 
   return (
     <h2 className={styles.text}>
@@ -18,7 +22,7 @@ export function Title({title, text}: ITitle): JSX.Element {
       </a>
       {
         isModalOpened &&
-        <Posts title={title} text={text} onClose={() => setIsModalOpened(false)}/>
+        <Posts title={title} text={text} comments={comments} onClose={() => setIsModalOpened(false)}/>
       }
     </h2>
   );

@@ -5,17 +5,20 @@ import retryTimes = jest.retryTimes;
 import ReactDOM from 'react-dom';
 // import {CommentsButtonIcon} from '../CardsList/Card/CommentsButton/CommentsButtonIcon';
 import {CommentForm} from '../CommentForm';
+import {ICommentsContext} from '../../hooks/useComments';
+import {Comments} from './Comments';
 
 interface IPosts {
   title?: string;
   text?: string;
+  comments?: Array<ICommentsContext>;
   onClose?: () => void;
 }
 
 function NOOP() {
   // do nothing
 }
-export function Posts({title, text, onClose = NOOP}: IPosts): JSX.Element {
+export function Posts({title, text, comments, onClose = NOOP}: IPosts): JSX.Element {
   const [isTitle, setIsTitle] = useState(false);
   const [isText, setIsText] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -43,16 +46,21 @@ export function Posts({title, text, onClose = NOOP}: IPosts): JSX.Element {
   if (!node) return <></>;
 
   return ReactDOM.createPortal((
-    <div ref={ref}>
-      <h2>
-        {isTitle ? title : 'Title'}
-      </h2>
-      <div>
-        <p>
-          {isText ? text : 'Text'}
-        </p>
+    <div className={styles.container}>
+      <div className={styles.containerInner} ref={ref}>
+        <h2 className={styles.title}>
+          {isTitle ? title : 'Title'}
+        </h2>
+        <div className={styles.text}>
+          <p>
+            {isText ? text : 'Text'}
+          </p>
+        </div>
+        <div className={styles.commentForm}>
+          <CommentForm />
+        </div>
+        <Comments />
       </div>
-      <CommentForm />
     </div>
   ), node);
 }

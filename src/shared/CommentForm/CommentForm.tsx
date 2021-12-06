@@ -13,9 +13,9 @@ export function CommentForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <textarea onChange={handleChange}/>
-      <button type={"submit"}>Комментировать</button>
+    <form className={styles.form} onSubmit={handleSubmit}>
+      <textarea className={styles.textarea} onChange={handleChange}/>
+      <button className={styles.button} type={"submit"}>Комментировать</button>
     </form>
   );
 }
