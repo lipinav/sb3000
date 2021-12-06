@@ -3,7 +3,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import styles from './posts.css';
 import retryTimes = jest.retryTimes;
 import ReactDOM from 'react-dom';
-import {CommentsButtonIcon} from '../CardsList/Card/CommentsButton/CommentsButtonIcon';
+// import {CommentsButtonIcon} from '../CardsList/Card/CommentsButton/CommentsButtonIcon';
 import {CommentForm} from '../CommentForm';
 
 interface IPosts {
@@ -21,10 +21,10 @@ export function Posts({title, text, onClose = NOOP}: IPosts): JSX.Element {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    setIsTitle(typeof title !== 'undefined' ? true : false);
+    setIsTitle(typeof title !== 'undefined');
   }, [title]);
   useEffect(() => {
-    setIsText(typeof text !== 'undefined' ? true : false);
+    setIsText(typeof text !== 'undefined');
   }, [text]);
 
   useEffect(() => {

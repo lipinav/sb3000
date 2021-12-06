@@ -1,7 +1,10 @@
 import React from 'react';
 import styles from './menubutton.css';
 
-export function MenuButton() {
+interface IMenuButton {
+  onClick?: () => void;
+}
+export function MenuButton(props: IMenuButton): JSX.Element {
   return (
     <button className={styles.menuButton}>
       <svg width="5" height="20" viewBox="0 0 5 20" fill="none" xmlns="http://www.w3.org/2000/svg">
