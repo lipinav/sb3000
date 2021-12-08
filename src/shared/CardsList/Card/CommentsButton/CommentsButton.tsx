@@ -5,8 +5,13 @@ import {constructN} from 'ramda';
 
 interface ICommentsButton {
   numComments?: number;
+  onClick?: () => void;
+  userClassName?: string;
 }
-export function CommentsButton({numComments}: ICommentsButton): JSX.Element {
+function NOOP() {
+  // do nothing
+}
+export function CommentsButton({numComments, onClick=NOOP, userClassName=styles.commentsButton}: ICommentsButton): JSX.Element {
   let commentsSpan;
   if (numComments) {
     commentsSpan = <span className={styles.commentsText}>{numComments}</span>;
@@ -14,7 +19,7 @@ export function CommentsButton({numComments}: ICommentsButton): JSX.Element {
     commentsSpan = <span className={styles.commentsText}>13</span>;
   }
   return (
-    <button className={styles.commentsButton}>
+    <button className={userClassName} onClick={() => onClick}>
       <CommentsButtonIcon />
       {commentsSpan}
     </button>

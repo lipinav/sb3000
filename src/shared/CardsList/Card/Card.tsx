@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styles from './card.css';
 import { MetaData } from './MetaData';
 import { Title } from './Title';
@@ -8,6 +8,7 @@ import { KarmaCounter } from './KarmaCounter';
 import { CommentsButton } from './CommentsButton';
 import { ShareButton } from './ShareButton';
 import { SaveButton } from './SaveButton';
+import {useComments} from '../../../hooks/useComments';
 
 interface ICardTitle {
     id?: string;
@@ -23,11 +24,13 @@ interface ICardTitle {
 }
 
 export function Card({ id, title, text, cardImg, numComments, contentCategories, karma, createdAt, authorName, avatar }: ICardTitle): JSX.Element {
+
+
   return (
     <li className={styles.card}>
       <div className={styles.textContent}>
         <MetaData author={authorName} avatar={avatar} createdAt={createdAt}/>
-        <Title title={title} text={text}/>
+        <Title title={title} text={text} id={id} author={authorName}/>
       </div>
 
       <Preview cardImg={cardImg}/>

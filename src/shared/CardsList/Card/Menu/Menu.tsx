@@ -6,9 +6,12 @@ import { GenericList } from '../../../GenericList';
 import { generateId } from '../../../../utils/react/generateRandomIndex';
 import { Icon } from '../../../Icon';
 import { Break } from '../../../Break';
+import {useIsMounted} from '../../../../hooks/useIsMounted';
 
 interface IMenuProps {
   children?: string;
+  isOpen?: boolean;  // to control dropdown
+  onFocus?: () => void;
 }
 
 interface IList {
@@ -66,27 +69,34 @@ const LIST: Array<IList> = [
   },
 ].map(generateId);
 
+function NOOP() {
+  // do nothing
+}
+
 export function Menu(props: IMenuProps): JSX.Element {
+  const {
+    children,
+    isOpen=false,
+    onFocus=NOOP,
+  } = props;
+
+  const [isDropdownOpen, setIsDropdownOpen] = React.useState(isOpen);
+  // const [isMounted] = useIsMounted();
+  // React.useEffect(() => setIsDropdownOpen(isOpen), [isOpen]);
+
   return (
-    <div className={styles.menu} >
-      <Dropdown
-        isOpen={false}
-        onOpen={() => console.log('opened')}
-        onClose={() => console.log('closed')}
-        button={<MenuButton />}
-        classNameList={styles.dropdownList}
-      >
-        <ul className={styles.menuList}>
-          <GenericList list={LIST}/>
-        </ul>
-        {/*<GenericList list={[]}/>*/}
-        {/*
-        <ul>
-          <li onClick={console.log}>click me</li>
-          <li>do not click me2</li>
-        </ul>
-        */}
-      </Dropdown>
+    <div className={styles.menu}
+         onClick={() => setIsDropdownOpen(true)}
+         onBlur={() => setIsDropdownOpen(false)}
+    >
+      <MenuButton />
+      {isDropdownOpen &&
+          <Dropdown classNameList={styles.dropdownList}>
+              <ul className={styles.menuList}>
+                  <GenericList list={LIST}/>
+              </ul>
+          </Dropdown>
+      }
     </div>
   );
 }

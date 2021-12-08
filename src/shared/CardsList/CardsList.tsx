@@ -27,12 +27,12 @@ export function CardsList({ list }: IMyListProps): JSX.Element {
             id, title, author,
             created_utc, icon_img,
             num_comments, score,
-            thumbnail, content_categories, selftext_html
+            thumbnail, content_categories, selftext
           }
         ) => {return (<Card key={id}
           id={id}
           title={title}
-          text={selftext_html}
+          text={selftext}
           cardImg={thumbnail}
           numComments={num_comments}
           createdAt={created_utc}
