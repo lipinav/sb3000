@@ -1,3 +1,23 @@
 .commentBody {
     margin-left: 20px;
 }
+
+.commentsButtonContainer {
+    vertical-align: top;
+    cursor: pointer;
+}
+.commentsButtonContainer:hover {
+    color: var(--orange);
+}
+.commentsButton {
+    margin: 14px 14px 0 14px;
+    padding: 0 20px 7px 0;
+}
+
+.componentForm {
+    padding: 20px;
+}
+
+.body {
+    padding: 10px 20px 0 0;
+}

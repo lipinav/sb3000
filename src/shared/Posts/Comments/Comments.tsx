@@ -5,6 +5,7 @@ import {CommentsButtonIcon} from '../../CardsList/Card/CommentsButton/CommentsBu
 import {CommentsButton} from '../../CardsList/Card/CommentsButton';
 import {CommentForm} from '../../CommentForm';
 import {ICommentsContextChildren, ICommentsContextData, ICommentsContextReplies} from '../../../hooks/useComments';
+import {Break} from '../../Break';
 
 interface IComments{
   author?: string;
@@ -29,7 +30,8 @@ export function Comments({author, createdAt, body, replies}: IComments): JSX.Ele
     }
   }, [replies])
   const handleClick = () => {
-    return setIsCommentForm(!isCommentForm);
+    console.log(`clicked`);
+    setIsCommentForm(!isCommentForm);
   }
   console.log(`isComments: ${isReplies}`);
   console.log(`id: ${author} reply: ${reply.length}`);
@@ -37,15 +39,19 @@ export function Comments({author, createdAt, body, replies}: IComments): JSX.Ele
   return (
     <div className={styles.commentBody}>
       <MetaData author={author} createdAt={createdAt}/>
-      <div>
+      <div className={styles.body}>
         <p>
           {body}
         </p>
       </div>
-      <CommentsButton onClick={() => handleClick}/>
+      <div onClick={handleClick} className={styles.commentsButtonContainer}>
+        <CommentsButton userClassName={styles.commentBody}/>
+        <Break size={4} inline={true} />
+        Ответить
+      </div>
       {
         isCommentForm &&
-          <CommentForm />
+          <CommentForm className={styles.componentForm} author={author}/>
       }
       {
         isReplies &&

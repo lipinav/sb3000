@@ -1,5 +1,5 @@
 /*eslint-env es6*/
-import React, {useEffect, useRef, useState} from 'react';
+import React, {ChangeEvent, useEffect, useRef, useState} from 'react';
 import styles from './posts.css';
 import retryTimes = jest.retryTimes;
 import ReactDOM from 'react-dom';
@@ -13,12 +13,15 @@ interface IPosts {
   text?: string;
   comments?: ICommentsContextData | string;
   onClose?: () => void;
+  author?: string;
+  onCommentChange?: (event: ChangeEvent<HTMLTextAreaElement>) => void;
+  comment?: string;
 }
 
 function NOOP() {
   // do nothing
 }
-export function Posts({title, text, comments, onClose = NOOP}: IPosts): JSX.Element {
+export function Posts({title, text, comments, onClose = NOOP, author, onCommentChange=NOOP, comment}: IPosts): JSX.Element {
   const [isTitle, setIsTitle] = useState(false);
   const [isText, setIsText] = useState(false);
   const [isComments, setIsComments] = useState(false);
@@ -77,7 +80,7 @@ export function Posts({title, text, comments, onClose = NOOP}: IPosts): JSX.Elem
           </p>
         </div>
         <div className={styles.commentForm}>
-          <CommentForm />
+          <CommentForm author={author} onCommentChange={onCommentChange} comment={comment}/>
         </div>
         {isReplies &&
           reply.map((item: ICommentsContextReplies) => {

@@ -19,7 +19,10 @@ body {
   margin: 0;
   background-color: var(--greyF4);
   font-size: 14px;
+  line-height: 1.85em;
+  /*
   line-height: 16px;
+  */
   font-family: 'Roboto', serif;
 }
 
