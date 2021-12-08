@@ -12,7 +12,7 @@ interface ITitle {
 export function Title({id, title, text}: ITitle): JSX.Element {
   const [isModalOpened, setIsModalOpened] = useState(false);
   const [comments] = useComments(id);
-  console.log(`id: ${id} Comments: ${comments?.length}`);
+  // console.log(`id: ${id} Comments: ${Object.keys(comments).length}`);
 
   return (
     <h2 className={styles.text}>

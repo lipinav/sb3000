@@ -15,7 +15,7 @@ export interface ICommentsContext {
   subredditNamePrefixed: string;  //"subreddit_name_prefixed": "r/nosleep",
   depth: number;         // "depth": 0,
   ups: number;           // "ups": 368
-  replies: ICommentsContext;         // {data: children: [
+  replies: ICommentsContextData | string;         // {data: children: [
                                      //                   { data: {
                                      //                             "replies": {}
                                      //                           } },
@@ -24,8 +24,23 @@ export interface ICommentsContext {
                                      // }
 }
 
+export interface ICommentsContextReplies {
+  kind?: string;
+  data?: ICommentsContext;
+}
+
+export interface ICommentsContextChildren {
+  kind?: string;
+  children?: Array<ICommentsContextReplies>;
+}
+
+export interface ICommentsContextData {
+  kind?: string;
+  data?: ICommentsContextChildren;
+}
+
 export function useComments (postId: string | undefined) {
-  const [comments, setComments] = useState<Array<ICommentsContext>>([]);
+  const [comments, setComments] = useState<ICommentsContextData | string>('');
   const token = useContext(tokenContext);
 
   function getComments() {
@@ -40,7 +55,9 @@ export function useComments (postId: string | undefined) {
     )
       .then((res) => {
         const commentsResp = res.data[1];
-        setComments(commentsResp?.data?.children);
+          if (typeof commentsResp != 'string') {
+            setComments(commentsResp);
+          }
         }
       )
       .catch((err) => {console.log('[src/hooks/useComments.ts] Axios err: ', err)});

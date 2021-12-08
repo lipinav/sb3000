@@ -5,13 +5,13 @@ import retryTimes = jest.retryTimes;
 import ReactDOM from 'react-dom';
 // import {CommentsButtonIcon} from '../CardsList/Card/CommentsButton/CommentsButtonIcon';
 import {CommentForm} from '../CommentForm';
-import {ICommentsContext} from '../../hooks/useComments';
+import {ICommentsContextChildren, ICommentsContextData, ICommentsContextReplies} from '../../hooks/useComments';
 import {Comments} from './Comments';
 
 interface IPosts {
   title?: string;
   text?: string;
-  comments?: Array<ICommentsContext>;
+  comments?: ICommentsContextData | string;
   onClose?: () => void;
 }
 
@@ -21,7 +21,11 @@ function NOOP() {
 export function Posts({title, text, comments, onClose = NOOP}: IPosts): JSX.Element {
   const [isTitle, setIsTitle] = useState(false);
   const [isText, setIsText] = useState(false);
+  const [isComments, setIsComments] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+  const [isReplies, setIsReplies] = useState(false);
+  const [reply, setReply] = useState<Array<ICommentsContextChildren>>([]);
+  console.group('src/shared/Posts/Posts.tsx');
 
   useEffect(() => {
     setIsTitle(typeof title !== 'undefined');
@@ -29,7 +33,20 @@ export function Posts({title, text, comments, onClose = NOOP}: IPosts): JSX.Elem
   useEffect(() => {
     setIsText(typeof text !== 'undefined');
   }, [text]);
+  useEffect(() => {
+    if (typeof comments != 'string' && typeof comments != 'undefined') {
+      if (typeof comments.data != 'undefined' && typeof comments.data?.children != 'undefined') {
+        setIsReplies(true);
+        setReply(comments.data.children);
+      }
+    } else {
+      setIsReplies(false);
+    }
+    // setIsComments(typeof comments != 'undefined' && typeof comments != 'string');
+  }, [comments]);
 
+  console.log(`isComments: ${isComments}`);
+  console.log(`reply: ${reply.length}`);
   useEffect(() => {
     function handleClick(event: MouseEvent) {
       if (event.target instanceof Node && !ref.current?.contains(event.target)) {
@@ -45,6 +62,9 @@ export function Posts({title, text, comments, onClose = NOOP}: IPosts): JSX.Elem
   const node = document.querySelector('#modal_root');
   if (!node) return <></>;
 
+
+
+  console.groupEnd();
   return ReactDOM.createPortal((
     <div className={styles.container}>
       <div className={styles.containerInner} ref={ref}>
@@ -59,7 +79,17 @@ export function Posts({title, text, comments, onClose = NOOP}: IPosts): JSX.Elem
         <div className={styles.commentForm}>
           <CommentForm />
         </div>
-        <Comments />
+        {isReplies &&
+          reply.map((item: ICommentsContextReplies) => {
+            return <Comments
+              key={item.data?.id}
+              author={item.data?.author}
+              createdAt={item?.data?.createdUtc}
+              body={item.data?.body}
+              replies={item.data?.replies}
+            />
+          })
+        }
       </div>
     </div>
   ), node);
