@@ -65,8 +65,6 @@ export function Posts({title, text, comments, onClose = NOOP, author, onCommentC
   const node = document.querySelector('#modal_root');
   if (!node) return <></>;
 
-
-
   console.groupEnd();
   return ReactDOM.createPortal((
     <div className={styles.container}>

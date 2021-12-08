@@ -25,6 +25,7 @@ interface ICardTitle {
 
 export function Card({ id, title, text, cardImg, numComments, contentCategories, karma, createdAt, authorName, avatar }: ICardTitle): JSX.Element {
 
+
   return (
     <li className={styles.card}>
       <div className={styles.textContent}>

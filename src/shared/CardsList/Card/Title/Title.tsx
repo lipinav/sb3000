@@ -19,6 +19,7 @@ export function Title({id, title, text, author}: ITitle): JSX.Element {
   function handleCommentChange(event: ChangeEvent<HTMLTextAreaElement>) {
     setComment(event.target.value);
   }
+
   return (
     <h2 className={styles.text}>
       <a href="#post-url" className={styles.postLink} onClick={() => setIsModalOpened(true)}>
