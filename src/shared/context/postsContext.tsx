@@ -1,5 +1,7 @@
 import React from 'react';
 import { usePostsData } from '../../hooks/usePostsData';
+import {useSelector} from 'react-redux';
+import {RootState} from '../../store';
 
 type TPostValue = string | number | Record<string, unknown> | null | Array<string> | undefined;
 

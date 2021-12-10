@@ -6,6 +6,7 @@ import {CommentsButton} from '../../CardsList/Card/CommentsButton';
 import {CommentForm} from '../../CommentForm';
 import {ICommentsContextChildren, ICommentsContextData, ICommentsContextReplies} from '../../../hooks/useComments';
 import {Break} from '../../Break';
+import {CommentFormContainer} from '../../CommentFormContainer';
 
 interface IComments{
   author?: string;
@@ -49,10 +50,12 @@ export function Comments({author, createdAt, body, replies}: IComments): JSX.Ele
         <Break size={4} inline={true} />
         Ответить
       </div>
-      {
-        isCommentForm &&
-          <CommentForm className={styles.componentForm} author={author}/>
-      }
+      <div className={styles.componentForm} >
+        {
+          isCommentForm &&
+            <CommentFormContainer author={author}/>
+        }
+      </div>
       {
         isReplies &&
           reply.map((item: ICommentsContextReplies) => {

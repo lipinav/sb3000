@@ -1,10 +1,11 @@
-import React, {ChangeEvent, FormEvent, useEffect, useRef, useState} from 'react';
+import React, {ChangeEvent, FormEvent, useEffect, useRef} from 'react';
 import styles from './commentform.css';
 
-interface ICommmentForm {
+interface ICommentForm {
   className?: string;
   author?: string;
-  onCommentChange?: (event: ChangeEvent<HTMLTextAreaElement>) => void;
+  onChange?: (event: ChangeEvent<HTMLTextAreaElement>) => void;
+  onSubmit?: (event: FormEvent) => void;
   comment?: string;
 }
 
@@ -12,16 +13,16 @@ function NOOP() {
   // do nothing
 }
 
-export function CommentForm(props: ICommmentForm) {
+export function CommentForm(props: ICommentForm) {
   const {
     className=styles.form,
     author,
-    onCommentChange=NOOP,
+    onChange=NOOP,
+    onSubmit=NOOP,
     comment=`${author}, ept `
   } = props;
-  const [value, setValue] = useState('');
-  const ref = useRef<HTMLTextAreaElement>(null);
 
+  const ref = useRef<HTMLTextAreaElement>(null);
   useEffect(() => {
     if (ref.current) {
       ref.current.focus();
@@ -29,18 +30,10 @@ export function CommentForm(props: ICommmentForm) {
       ref.current.selectionEnd = ref.current.value.length;
     }
   },[])
-  function handleChange(event: ChangeEvent<HTMLTextAreaElement>) {
-    setValue(event.target.value);
-  }
-
-  function handleSubmit(event: FormEvent) {
-    event.preventDefault();
-    console.log(comment);
-  }
 
   return (
-    <form className={className} onSubmit={handleSubmit}>
-      <textarea className={styles.textarea} onChange={onCommentChange} defaultValue={comment} ref={ref}/>
+    <form className={className} onSubmit={onSubmit}>
+      <textarea className={styles.textarea} onChange={onChange} defaultValue={comment} ref={ref}/>
       <button className={styles.button} type={"submit"}>Комментировать</button>
     </form>
   );

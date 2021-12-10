@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useEffect, useState} from 'react';
+import React, {ChangeEvent, SyntheticEvent, useEffect, useState} from 'react';
 import styles from './title.css';
 import { Posts } from '../../../Posts';
 import {useComments} from '../../../../hooks/useComments';
@@ -20,9 +20,14 @@ export function Title({id, title, text, author}: ITitle): JSX.Element {
     setComment(event.target.value);
   }
 
+  function handleClick(event: SyntheticEvent) {
+    event.preventDefault();
+    setIsModalOpened(true);
+  }
+
   return (
     <h2 className={styles.text}>
-      <a href="#post-url" className={styles.postLink} onClick={() => setIsModalOpened(true)}>
+      <a href="#post-url" className={styles.postLink} onClick={handleClick}>
         {title}
         {/*Следует отметить, что новая модель организационной деятельности...*/}
       </a>
