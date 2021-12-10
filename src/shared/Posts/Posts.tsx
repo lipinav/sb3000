@@ -1,12 +1,10 @@
 /*eslint-env es6*/
 import React, {ChangeEvent, useEffect, useRef, useState} from 'react';
 import styles from './posts.css';
-import retryTimes = jest.retryTimes;
 import ReactDOM from 'react-dom';
-// import {CommentsButtonIcon} from '../CardsList/Card/CommentsButton/CommentsButtonIcon';
-import {CommentForm} from '../CommentForm';
 import {ICommentsContextChildren, ICommentsContextData, ICommentsContextReplies} from '../../hooks/useComments';
 import {Comments} from './Comments';
+import {CommentFormContainer} from '../CommentFormContainer';
 
 interface IPosts {
   title?: string;
@@ -78,7 +76,7 @@ export function Posts({title, text, comments, onClose = NOOP, author, onCommentC
           </p>
         </div>
         <div className={styles.commentForm}>
-          <CommentForm author={author} onCommentChange={onCommentChange} comment={comment}/>
+          <CommentFormContainer author={author}/>
         </div>
         {isReplies &&
           reply.map((item: ICommentsContextReplies) => {
