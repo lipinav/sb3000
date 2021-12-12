@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom/server';
 import { App } from '../App';
 import { indexTemplate } from './indexTemplate';
 import axios from 'axios';
+import {useDispatch} from "react-redux";
+import {tokenRequestAsync} from "../store/token/actions";
 
 const app = express();
 

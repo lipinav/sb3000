@@ -1,14 +1,14 @@
 import React, {ChangeEvent, FormEvent} from 'react';
 import {CommentForm} from '../CommentForm';
 import {useDispatch, useSelector} from 'react-redux';
-import {RootState, updateComment} from '../../store';
+import {TRootState, updateComment} from '../../store/reducer';
 
 interface ICommentFormContainer {
   author?: string;
 }
 
 export function CommentFormContainer({author}: ICommentFormContainer): JSX.Element {
-  const value = useSelector<RootState, string>(state => state.commentText);
+  const value = useSelector<TRootState, string>(state => state.commentText);
   const dispatch = useDispatch();
 
   function handleChange(event: ChangeEvent<HTMLTextAreaElement>) {

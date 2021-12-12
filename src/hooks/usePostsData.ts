@@ -3,8 +3,8 @@ import axios from 'axios';
 import { tokenContext } from '../shared/context/tokenContext';
 import * as R from 'ramda';
 import {pureUrl} from '../utils/js/pureUrl';
-import {useSelector} from 'react-redux';
-import {RootState} from '../store';
+import {useDispatch, useSelector} from 'react-redux';
+import {TRootState} from '../store/reducer';
 
 type TPostValue = string | number | Record<string, unknown> | null | Array<string> | undefined;
 
@@ -61,7 +61,7 @@ interface IPostsResp {
 
 export function usePostsData () {
   // const [postsData, setPostsData] = useState<IPostsDataPicked>({});
-  const token = useSelector<RootState, string>(state => state.token);
+  const token = useSelector<TRootState, string>(state => state.token);
   const [postsAndAuthor, setPostsAndAuthor] = useState<IPostsDataPicked>(
     {after: 'undefined', dist: 0, children: []}
   );

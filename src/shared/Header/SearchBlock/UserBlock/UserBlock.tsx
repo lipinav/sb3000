@@ -6,10 +6,12 @@ import { Break } from './../../../Break';
 
 interface IUserBlockProps {
   avatarSrc?: string,
-  username?: string
+  username?: string,
+  loading?: boolean,
+  error?: string
 }
 
-export function UserBlock({ avatarSrc, username }: IUserBlockProps) {
+export function UserBlock({ avatarSrc, username, loading, error }: IUserBlockProps) {
   return (
     <a 
       href={'https://www.reddit.com/api/v1/authorize?client_id='+process.env.CLIENT_ID+'&response_type=code&state=random_string&redirect_uri='+process.env.REDIRECT_URI+'&duration=permanent&scope=read submit identity'}
@@ -28,7 +30,10 @@ export function UserBlock({ avatarSrc, username }: IUserBlockProps) {
           size={20}
           color={username ? EColors.black : EColors.grey99}
           >
-        {username || 'Аноним'}
+        { loading
+          ? 'Loading'
+          : username || 'Аноним'
+        }
         </Text>
       </div>
     </a>
