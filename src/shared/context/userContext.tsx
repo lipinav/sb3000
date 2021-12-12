@@ -16,7 +16,9 @@ export function UserContextProvider({ children }: IUserContextProvider) {
   const [data] = useUserData();
   return (
     <userContext.Provider value={data}>
+    <>
       {children}
+    </>
     </userContext.Provider>
   )
 }
