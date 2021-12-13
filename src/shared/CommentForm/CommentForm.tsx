@@ -73,7 +73,9 @@ export function CommentForm(props: ICommentForm) {
         </button>
         {errors.comment && <span>{errors.comment.message}</span>}
       </form>
+{/*
     <DevTool control={control} />
+*/}
   </>
   )
 }
