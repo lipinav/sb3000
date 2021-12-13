@@ -25,3 +25,7 @@
   font-size: 16px;
   cursor: pointer;
 }
+.button:disabled {
+  opacity: 50%;
+  cursor: default;
+}

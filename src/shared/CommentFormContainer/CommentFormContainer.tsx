@@ -1,5 +1,5 @@
 import React, {ChangeEvent, FormEvent} from 'react';
-import {CommentForm} from '../CommentForm';
+import {CommentForm, ICommentValue} from '../CommentForm';
 import {useDispatch, useSelector} from 'react-redux';
 import {TRootState, updateComment} from '../../store/reducer';
 
@@ -8,7 +8,7 @@ interface ICommentFormContainer {
 }
 
 export function CommentFormContainer({author}: ICommentFormContainer): JSX.Element {
-  const value = useSelector<TRootState, string>(state => state.commentText);
+  const value = useSelector<TRootState, {comment:string}>(state => state.commentText);
   const dispatch = useDispatch();
 
   function handleChange(event: ChangeEvent<HTMLTextAreaElement>) {
@@ -16,8 +16,7 @@ export function CommentFormContainer({author}: ICommentFormContainer): JSX.Eleme
     dispatch(updateComment(event.target.value));
   }
 
-  function handleSubmit(event: FormEvent) {
-    event.preventDefault();
+  function handleSubmit(value: ICommentValue) {
     console.log(value);
   }
 

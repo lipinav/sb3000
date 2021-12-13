@@ -12,13 +12,18 @@ import {tokenReducer} from './token/reducer';
 
 export type TRootState = {
   token: string;
-  commentText: string;
+  // commentText: string;
+  commentText: {
+    comment: string;
+  }
   me: TMeState;
 }
 
-const initialState: TRootState = {
+export const initialState: TRootState = {
   token: '',
-  commentText: 'ept ',
+  commentText: {
+    comment: 'ept) '
+  },
   me: {
     loading: false,
     data: {},
@@ -29,9 +34,12 @@ const initialState: TRootState = {
 const UPDATE_COMMENT = 'UPDATE_COMMENT';
 type TUpdateComment = {
   type: typeof UPDATE_COMMENT,
-  text: string
+  // text: string
+  text: {
+    comment: string
+  }
 }
-export const updateComment: ActionCreator<TUpdateComment> = (text: string) => ({
+export const updateComment: ActionCreator<TUpdateComment> = (text: {comment: string}) => ({
   type: UPDATE_COMMENT,
   text
 })
