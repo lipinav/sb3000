@@ -2,4 +2,21 @@
   .cardsList {
     padding: 40px 0;
   }
+
+  .button {
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: var(--orange);
+    border: none;
+    color: white;
+    padding: 17px 50px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  .button:focus {
+    opacity: 50%;
+  }
 }

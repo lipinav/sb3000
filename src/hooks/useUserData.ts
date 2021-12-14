@@ -16,15 +16,12 @@ export function useUserData () {
   // const token = useContext(tokenContext);
   const token = useSelector<TRootState, string>(state => state.token);
   const data = useSelector<TRootState, IUserData>(state => state.me.data);
-  console.log(`token: ${token}`);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!token) return
-    if ( token !== 'undefined' && token !== '' ) {
-      dispatch(meRequestAsync);
-    }
+    if (token === 'undefined' || !token) return;
+    dispatch(meRequestAsync);
   }, [token])
   return [data]
 }

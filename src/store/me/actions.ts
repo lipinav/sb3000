@@ -35,6 +35,7 @@ export const meRequestError: ActionCreator<TMeRequestErrorAction> = (error: stri
 
 export const meRequestAsync: ThunkAction<void, TRootState, unknown, Action<string>> = (dispatch, getState) => {
   dispatch(meRequest());
+  if (getState().token === 'undefined' || !getState().token) return;
   axios.get(
     'https://oauth.reddit.com/api/v1/me',
     {  // config
