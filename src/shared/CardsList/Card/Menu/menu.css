@@ -133,8 +133,8 @@
 
 @media all and (min-width: 1024px) {
   .menu {
-    top: 57px;
-    right: 70px;
+    top: 62px;
+    right: 100px;
   }
 
   .dropdownList {

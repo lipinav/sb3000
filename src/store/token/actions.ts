@@ -15,7 +15,7 @@ export const setToken: ActionCreator<TSetTokenAction> = (token: string) => ({
 
 export const saveToken = (): ThunkAction<void, TRootState, unknown, TRootAction> => (dispatch) => {
   useEffect(() => {
-    if (window.__token__) {
+    if (window.__token__ && typeof window.__token__ !== 'undefined' && window.__token__ !== 'undefined') {
       dispatch(setToken(window.__token__));
     }
   }, [])
