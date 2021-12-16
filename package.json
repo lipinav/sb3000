@@ -70,6 +70,7 @@
     "axios": "^0.24.0",
     "classnames": "^2.3.1",
     "compression": "^1.7.4",
+    "easy-peasy": "^5.0.4",
     "express": "^4.17.1",
     "helmet": "^4.6.0",
     "nodemon": "^2.0.6",
