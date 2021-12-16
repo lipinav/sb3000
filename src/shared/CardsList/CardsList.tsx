@@ -36,13 +36,9 @@ export function CardsList(): JSX.Element {
     setIsMorePosts(posts.loadCount !== 0 && posts.loadCount % 3 === 0);
   }, [posts]);
 
-  console.log(`posts count: ${posts.children?.length}`);
-  // console.log(`children ${!!posts.children?.length} loading: ${!posts.loading} error: ${!posts.error}`);
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
-      // console.log(`isIntersecting: ${entries[0].isIntersecting} posts: ${posts.children?.length} !!posts.children?.length: ${!!posts.children?.length} res: ${entries[0].isIntersecting && !!posts.children?.length} after: ${posts.after}`);
       if (entries[0].isIntersecting && !!posts.children?.length && !isMorePosts) {
-        // console.log(`Before Load more, newPosts: ${newPosts}`);
         setNewPosts(true);
       }
     }, {
@@ -57,7 +53,6 @@ export function CardsList(): JSX.Element {
       }
     }
   }, [bottomOfList.current, newPosts]);
-  console.log(`loadCount: ${posts.loadCount}`);
   function handleClick() {
     setNewPosts(true);
     if (buttonRef.current) buttonRef.current.innerHTML = 'Loading...';

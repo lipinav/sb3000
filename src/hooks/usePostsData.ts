@@ -125,7 +125,6 @@ export function usePostsData () {
                    loadCount: posts.loadCount
                  }
              })
-             // console.log(`posts updated`);
              setNewPosts(false);
            }
          })
@@ -136,9 +135,7 @@ export function usePostsData () {
   }
    }
   async function loadPosts() {
-    // console.log(`newPosts: ${newPosts} skip_axios: ${token === 'undefined' || token === '' || !newPosts}`);
     if (token === 'undefined' || token === '' || !newPosts) return;
-    // console.log(`after: ${postsAndAuthor.after}`);
     setPostsAndAuthor((prevPosts) => {
       return {
         ...prevPosts,
@@ -202,7 +199,6 @@ export function usePostsData () {
           error: '',
           loadCount: postsAndAuthor.loadCount + 1
         });
-        // console.log(`post downloaded newPosts: ${newPosts}`);
       }
     } catch (err) {
       console.log('[src/hooks/usePostsData.ts] Axios err: ', err)

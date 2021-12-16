@@ -12,12 +12,10 @@ export function CommentFormContainer({author}: ICommentFormContainer): JSX.Eleme
   const dispatch = useDispatch();
 
   function handleChange(event: ChangeEvent<HTMLTextAreaElement>) {
-    console.log(`Saved comment: ${event.target.value}`);
     dispatch(updateComment({comment: event.target.value}));
   }
 
   function handleSubmit(value: ICommentValue) {
-    console.log(value);
   }
 
   return (
