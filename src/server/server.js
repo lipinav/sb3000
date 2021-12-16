@@ -10,13 +10,6 @@ const app = express();
 
 app.use('/static', express.static('./dist/client'));  // route for static files
 
-app.get('/', (req, res) => {
-  res.send(
-    indexTemplate(    // template would send from server
-      ReactDOM.renderToString(App())
-    ),
-  );
-});
 
 app.get('/auth', (req, res) => {
   console.log(`code: ${req.query.code}`);
@@ -45,6 +38,14 @@ app.get('/auth', (req, res) => {
       );
     })
     .catch(console.log());
+});
+
+app.get('*', (req, res) => {
+  res.send(
+    indexTemplate(    // template would send from server
+      ReactDOM.renderToString(App())
+    ),
+  );
 });
 
 app.listen(3000, () => {

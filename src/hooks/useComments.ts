@@ -64,7 +64,7 @@ export function useComments (postId: string | undefined) {
       .catch((err) => {console.log('[src/hooks/useComments.ts] Axios err: ', err)});
   }
   useEffect(() => {
-    if (postId !== '' && typeof postId !== 'undefined') {
+    if (token !== '' && typeof token !== 'undefined' && postId !== '' && typeof postId !== 'undefined') {
       getComments();
     }
   }, [postId]);

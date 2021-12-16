@@ -36,11 +36,31 @@ interface IPosts {
   icon_img?: string;
   [N: string]: TPostValue;
 }
-
+interface IPostsNoId {
+  thumbnail?: string;
+  author?: string;
+  title?: string;
+  name?: string;
+  created_utc?: number;
+  id?: string;
+  selftext?: string;
+  selftext_html?: string;
+  num_comments?: number;
+  preview?: Record<string, unknown>;
+  score?: number;
+  content_categories?: Array<string>;
+  icon_url?: string;
+  icon_img?: string;
+  [N: string]: TPostValue;
+}
+interface IPostsByIds {
+  [N: string]: IPostsNoId;
+}
 export interface IPostsDataPicked {
   after?: string;
   dist?: number;
   children: Array<IPosts>;
+  byIds: IPostsByIds;
   loading: boolean;
   error: string;
   loadCount: number;
@@ -66,7 +86,7 @@ export function usePostsData () {
   // const [postsData, setPostsData] = useState<IPostsDataPicked>({});
   const token = useSelector<TRootState, string>(state => state.token);
   const [postsAndAuthor, setPostsAndAuthor] = useState<IPostsDataPicked>(
-    {after: '', dist: 0, children: [], loading: false, error: '', loadCount: 0}
+    {after: '', dist: 0, children: [], byIds: {}, loading: false, error: '', loadCount: 0}
   );
   const [newPosts, setNewPosts] = useState(true);
   // const token = useContext(tokenContext);
@@ -89,11 +109,17 @@ export function usePostsData () {
            const authorData: IAuthorData = resp.data;
            if (typeof authorData.data?.icon_img !== 'undefined') {
              const icon = pureUrl(authorData.data.icon_img);
+             const newObjById: IPostsByIds = {};
+             if (typeof item.id !== 'undefined') {
+               const key = item.id;
+               newObjById[key] = {...item, icon_img: icon};
+             }
              setPostsAndAuthor(prevState => {
                  return {
                    after: posts.after,
                    dist: posts.dist,
                    children: prevState.children.concat({...item, icon_img: icon}),
+                   byIds: {...prevState.byIds, ...newObjById},
                    loading: false,
                    error: '',
                    loadCount: posts.loadCount
@@ -122,7 +148,7 @@ export function usePostsData () {
     })
     try {
       const resp = await axios.get(
-        'https://oauth.reddit.com/rising',
+        'https://oauth.reddit.com/best',
         {  // config
           headers: {
             'Authorization': `bearer ${token}`,
@@ -157,10 +183,21 @@ export function usePostsData () {
             return [];
           }
         });
+        // save for future
+        const byIds: IPostsByIds = R.reduce((acc, post: IPosts) => {
+          if (post.id !== '' && typeof post.id !== 'undefined') {
+            const postsNoId: IPostsNoId = R.omit(['id'], post);
+            const id = post.id;
+            return {...acc, id: postsNoId}
+          } else {
+            return acc
+          }
+        }, {}, postsOnlyResp);
         addAuthorData({
           after: postsResp.data.after,
           dist: postsResp.data.dist,
           children: postsOnlyResp,
+          byIds: {},
           loading: true,
           error: '',
           loadCount: postsAndAuthor.loadCount + 1
