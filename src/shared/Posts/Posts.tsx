@@ -59,8 +59,6 @@ export function Posts(): JSX.Element {
     }
   }, [comments]);
 
-  console.log(`comments: ${JSON.stringify(comments)}`);
-
   useEffect(() => {
     function handleClick(event: MouseEvent) {
       if (event.target instanceof Node && !ref.current?.contains(event.target)) {
