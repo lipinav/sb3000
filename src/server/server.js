@@ -3,13 +3,19 @@ import ReactDOM from 'react-dom/server';
 import { App } from '../App';
 import { indexTemplate } from './indexTemplate';
 import axios from 'axios';
-import {useDispatch} from "react-redux";
-import {tokenRequestAsync} from "../store/token/actions";
+import compression from 'compression';
+import helmet from 'helmet';
+const IS_DEV = process.env.NODE_ENV !== 'production';
 
 const app = express();
 
+if (!IS_DEV) {
+  app.use(compression());
+  app.use(helmet({
+    contentSecurityPolicy: false
+  }));
+}
 app.use('/static', express.static('./dist/client'));  // route for static files
-
 
 app.get('/auth', (req, res) => {
   console.log(`code: ${req.query.code}`);

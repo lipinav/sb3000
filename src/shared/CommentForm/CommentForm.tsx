@@ -37,7 +37,6 @@ export function CommentForm(props: ICommentForm) {
     // comment={comment: `${author}, ept `},
   } = props;
 
-  console.log(`old comment: ${typeof comment}: ${JSON.stringify(comment)} ${comment}`);
   const {
     setValue,
     control,
