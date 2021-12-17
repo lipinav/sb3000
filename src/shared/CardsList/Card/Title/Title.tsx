@@ -2,6 +2,7 @@ import React, {ChangeEvent, SyntheticEvent, useEffect, useState} from 'react';
 import styles from './title.css';
 import { Posts } from '../../../Posts';
 import {useComments} from '../../../../hooks/useComments';
+import {Link} from 'react-router-dom';
 
 interface ITitle {
   id?: string;
@@ -10,39 +11,13 @@ interface ITitle {
   author?: string;
 }
 
-export function Title({id, title, text, author}: ITitle): JSX.Element {
-  const [isModalOpened, setIsModalOpened] = useState(false);
-  const [comments] = useComments(id);
-  const [comment, setComment] = useState(`${author}, ept `);
-  // console.log(`id: ${id} Comments: ${Object.keys(comments).length}`);
-
-  function handleCommentChange(event: ChangeEvent<HTMLTextAreaElement>) {
-    setComment(event.target.value);
-  }
-
-  function handleClick(event: SyntheticEvent) {
-    event.preventDefault();
-    setIsModalOpened(true);
-  }
+export function Title({id, title}: ITitle): JSX.Element {
 
   return (
     <h2 className={styles.text}>
-      <a href="#post-url" className={styles.postLink} onClick={handleClick}>
+      <Link to={`/posts/${id}`} className={styles.postLink}>
         {title}
-        {/*Следует отметить, что новая модель организационной деятельности...*/}
-      </a>
-      {
-        isModalOpened &&
-        <Posts
-          title={title}
-          text={text}
-          comments={comments}
-          onClose={() => setIsModalOpened(false)}
-          author={author}
-          onCommentChange={handleCommentChange}
-          comment={comment}
-        />
-      }
+      </Link>
     </h2>
   );
 }

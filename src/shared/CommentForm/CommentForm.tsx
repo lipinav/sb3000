@@ -33,9 +33,11 @@ export function CommentForm(props: ICommentForm) {
     author,
     onChange=NOOP,
     onSubmit=NOOP,
-    comment={comment: `${author}, ept `},
+    comment,
+    // comment={comment: `${author}, ept `},
   } = props;
 
+  console.log(`old comment: ${typeof comment}: ${JSON.stringify(comment)} ${comment}`);
   const {
     setValue,
     control,
@@ -60,8 +62,8 @@ export function CommentForm(props: ICommentForm) {
             { required: true, minLength: { value: 3, message: 'Min 3 symbols required'}}
           )}
           onChange={(e) => {
-            onChange(e);
             setValue('comment', e.target.value, { shouldValidate: true })
+            onChange(e);
           }}
         />
         <button

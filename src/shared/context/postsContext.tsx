@@ -30,21 +30,20 @@ interface IPostsContext {
   error: string;
 }
 
-export const postsContext = React.createContext<IPostsContext>({
-  after: '', dist: 0, children: [], loading: false, error: ''
-});
+export const postsContext = React.createContext<[IPostsDataPicked, React.Dispatch<React.SetStateAction<boolean>>, boolean]>([
+  { after: '', dist: 0, children: [], byIds: {}, loading: false, error: '', loadCount: 0 },
+  () => {return},
+  true
+  ]);
 
 interface IPostsContentProvider {
   children?: React.ReactNode
 }
 export function PostsContextProvider({ children }: IPostsContentProvider) {
-  // const [posts] = usePostsData();
+  const [postsAndAuthor, setNewPosts, newPosts] = usePostsData();
   return (
-    <>
-{/*
-      <postsContext.Provider value={posts}>
-*/}
+    <postsContext.Provider value={[postsAndAuthor, setNewPosts, newPosts]}>
       {children}
-    </>
+    </postsContext.Provider>
   )
 }

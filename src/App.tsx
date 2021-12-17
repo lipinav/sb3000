@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useEffect, useState} from 'react';
+import React, {ChangeEvent, ReactNode, useEffect, useState} from 'react';
 // import { useToken } from './hooks/useToken';
 // import { usePostsData } from './hooks/usePostsData';
 import './main.global.css';
@@ -16,12 +16,11 @@ import {Provider} from 'react-redux';
 import {rootReducer, TRootAction, TRootState} from './store/reducer';
 import thunk, {ThunkMiddleware} from 'redux-thunk';
 import {saveToken} from './store/token/actions';
+import {BrowserRouter as Router, Redirect, Route, Switch} from 'react-router-dom';
+import {Posts} from './shared/Posts';
+import {NoRoute} from './shared/NoRoute';
 
-const LIST = [
-  {text: 'one', As: 'a' as const, id: "asdf1"},
-  {text: 'two', As: 'a' as const, id: "asdf2"},
-  {text: 'three', As: 'a' as const, id: "asdf3"}
-]
+
 
 // const token = localStorage.getItem('token') || window.__token__;
 const store = createStore(rootReducer, composeWithDevTools(
@@ -29,23 +28,39 @@ const store = createStore(rootReducer, composeWithDevTools(
 ));
 
 function AppComponent() {
-  const [list, setList] = useState(LIST);
+  const [isMounted, setIsMounted] = useState(false);
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
   // const [token] = useToken();
   // const [posts] = usePostsData();
 
   store.dispatch(saveToken());
   return(
     <Provider store={store}>
+      {isMounted && <Router>
         <UserContextProvider>
           <Layout>
             <Header />
             <Content>
               <PostsContextProvider>
-                <CardsList list={list}/>
+                <Switch>
+                  <Route exact path={['/', '/auth']}>
+                    <Redirect to='/posts' />
+                  </Route>
+                  <Route path='/posts' >
+                    <CardsList />
+                      <Route path='/posts/:id'>
+                        <Posts />
+                      </Route>
+                  </Route>
+                  <Route component={NoRoute} />
+                </Switch>
               </PostsContextProvider>
             </Content>
           </Layout>
         </UserContextProvider>
+      </Router>}
     </Provider>
   );
 }
