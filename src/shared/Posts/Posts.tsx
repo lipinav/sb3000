@@ -34,14 +34,7 @@ export function Posts(): JSX.Element {
   const {id} = useParams<{id: string}>();
   const [comments] = useComments(id);
 
-  console.group('src/shared/Posts/Posts.tsx');
-  // save for future
-  // const post = R.find(R.whereEq({id: id}), posts.children);
   const post = posts.byIds[id];
-  console.log(`id: ${id}`);
-  console.log(`posts: ${posts.children.length}`);
-  console.log(`post: ${typeof post}`);
-  // console.log(`title: ${title} text: ${text} author: ${author}`);
   let title;
   let text;
   let author;
@@ -64,9 +57,6 @@ export function Posts(): JSX.Element {
     }
   }, [comments]);
 
-  // console.log(`isComments: ${isComments}`);
-  console.log(`comments: ${JSON.stringify(comments)}`);
-
   useEffect(() => {
     function handleClick(event: MouseEvent) {
       if (event.target instanceof Node && !ref.current?.contains(event.target)) {
@@ -82,7 +72,6 @@ export function Posts(): JSX.Element {
    const node = document.querySelector('#modal_root');
    if (!node) return <></>;
 
-  // console.groupEnd();
   return ReactDOM.createPortal((
     <div className={styles.container}>
       <div className={styles.containerInner} ref={ref}>
