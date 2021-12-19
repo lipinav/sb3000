@@ -19,13 +19,25 @@ import {saveToken} from './store/token/actions';
 import {BrowserRouter as Router, Redirect, Route, Switch} from 'react-router-dom';
 import {Posts} from './shared/Posts';
 import {NoRoute} from './shared/NoRoute';
-
-
+import {Action, action, createStore as createEasyStore, persist, StoreProvider} from 'easy-peasy';
 
 // const token = localStorage.getItem('token') || window.__token__;
 const store = createStore(rootReducer, composeWithDevTools(
   applyMiddleware(thunk as ThunkMiddleware<TRootState, TRootAction>),
 ));
+interface ICommentModel {
+  commentText: {comment: string};
+}
+export interface IStoreModel {
+  commentText: {comment: string};
+  add: Action<IStoreModel, {comment: string}>;
+}
+const easyStore = createEasyStore<IStoreModel>(persist({
+    commentText: {comment: 'Easy peasy lemon squeezy'},
+    add: action((state, payload) => {
+      state.commentText = payload
+    })})
+);
 
 function AppComponent() {
   const [isMounted, setIsMounted] = useState(false);
@@ -38,29 +50,31 @@ function AppComponent() {
   store.dispatch(saveToken());
   return(
     <Provider store={store}>
-      {isMounted && <Router>
-        <UserContextProvider>
-          <Layout>
-            <Header />
-            <Content>
-              <PostsContextProvider>
-                <Switch>
-                  <Route exact path={['/', '/auth']}>
-                    <Redirect to='/posts' />
-                  </Route>
-                  <Route path='/posts' >
-                    <CardsList />
-                      <Route path='/posts/:id'>
-                        <Posts />
-                      </Route>
-                  </Route>
-                  <Route component={NoRoute} />
-                </Switch>
-              </PostsContextProvider>
-            </Content>
-          </Layout>
-        </UserContextProvider>
-      </Router>}
+      <StoreProvider store={easyStore}>
+        {isMounted && <Router>
+          <UserContextProvider>
+            <Layout>
+              <Header />
+              <Content>
+                <PostsContextProvider>
+                  <Switch>
+                    <Route exact path={['/', '/auth']}>
+                      <Redirect to='/posts' />
+                    </Route>
+                    <Route path='/posts' >
+                      <CardsList />
+                        <Route path='/posts/:id'>
+                          <Posts />
+                        </Route>
+                    </Route>
+                    <Route component={NoRoute} />
+                  </Switch>
+                </PostsContextProvider>
+              </Content>
+            </Layout>
+          </UserContextProvider>
+        </Router>}
+      </StoreProvider>
     </Provider>
   );
 }
