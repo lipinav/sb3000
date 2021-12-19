@@ -34,6 +34,8 @@ export function Posts(): JSX.Element {
   const {id} = useParams<{id: string}>();
   const [comments] = useComments(id);
 
+  // save for future
+  // const post = R.find(R.whereEq({id: id}), posts.children);
   const post = posts.byIds[id];
   let title;
   let text;
@@ -56,6 +58,8 @@ export function Posts(): JSX.Element {
       setIsReplies(false);
     }
   }, [comments]);
+
+  console.log(`comments: ${JSON.stringify(comments)}`);
 
   useEffect(() => {
     function handleClick(event: MouseEvent) {
